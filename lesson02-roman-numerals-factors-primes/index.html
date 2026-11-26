@@ -1,0 +1,2072 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>11+ Maths Lesson 2: Rounding &amp; Negatives Review, Roman Numerals, Factors and Primes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.75rem; }
+      * { box-sizing: border-box; }
+      :root{
+        --bg:#FFF6E9; --card:#FFFFFF; --card2:#FFF1D6;
+        --ink:#22304A; --muted:#5B6B82;
+        --coral:#F2603E; --coral-d:#C74524;
+        --teal:#0E9594; --teal-d:#0A6E6D;
+        --sun:#FFB627; --sky:#3E92CC;
+        --good:#2E9E5B; --bad:#D93A2B;
+        --line:#EDDCBE; --chip:#FDEBD2;
+        --neg:#3E92CC; --pos:#F2603E;
+        --shadow:0 4px 0 rgba(34,48,74,.08), 0 10px 24px rgba(34,48,74,.08);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#121C2C; --card:#1D2A40; --card2:#24334F;
+          --ink:#F2F5FA; --muted:#A9B8CC;
+          --coral:#FF7A57; --coral-d:#FF9A80;
+          --teal:#2FBFBF; --teal-d:#5ED6D6;
+          --sun:#FFC53D; --sky:#6FB6E8;
+          --good:#4CC47C; --bad:#FF6B5E;
+          --line:#33445E; --chip:#2A3C5C;
+          --neg:#6FB6E8; --pos:#FF7A57;
+          --shadow:0 4px 0 rgba(0,0,0,.25), 0 10px 24px rgba(0,0,0,.3);
+        }
+      }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0; background:var(--bg); color:var(--ink);
+        font-family:"Nunito","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+        font-size:17px; line-height:1.55;
+        -webkit-text-size-adjust:100%;
+      }
+      .num, h1, h2, h3, .big-num{ font-family:"Baloo 2","Nunito","PingFang SC","Microsoft YaHei",sans-serif; }
+      main{ max-width:880px; margin:0 auto; padding:0 16px 64px; }
+      header.hero{ padding:28px 4px 6px; }
+      header.hero h1{ font-size:clamp(28px,6vw,44px); line-height:1.15; margin:0 0 6px; font-weight:800; }
+      header.hero h1 .en{ color:var(--coral); }
+      header.hero p{ margin:0; color:var(--muted); font-size:17px; max-width:60ch; }
+      .tagrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+      .tag{ background:var(--chip); border:2px solid var(--line); border-radius:999px; padding:6px 14px; font-weight:800; font-size:14px; }
+      nav.toc{
+        position:sticky; top:0; z-index:20; display:flex; gap:8px; overflow-x:auto;
+        padding:10px 2px; background:var(--bg); scrollbar-width:none;
+      }
+      nav.toc::-webkit-scrollbar{ display:none; }
+      nav.toc a{
+        flex:0 0 auto; text-decoration:none; color:var(--ink); font-weight:800; font-size:15px;
+        background:var(--card); border:2px solid var(--line); border-radius:999px; padding:10px 16px; min-height:44px;
+        display:inline-flex; align-items:center;
+      }
+      nav.toc a:active{ transform:scale(.97); }
+      section{ margin-top:34px; }
+      .sec-head{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+      .sec-badge{
+        flex:0 0 auto; width:46px; height:46px; border-radius:14px; display:grid; place-items:center;
+        font-family:"Baloo 2"; font-weight:800; font-size:22px; color:#fff;
+      }
+      .badge-a{ background:var(--coral); } .badge-b{ background:var(--sky); }
+      .badge-c{ background:var(--teal); } .badge-d{ background:#B3541E; }
+      .sec-head h2{ margin:0; font-size:clamp(22px,4.5vw,30px); font-weight:800; line-height:1.2; }
+      .sec-head h2 .en{ display:block; font-size:.62em; color:var(--muted); font-weight:700; }
+      .sec-sub{ color:var(--muted); margin:2px 0 16px; }
+      .card{
+        background:var(--card); border:2px solid var(--line); border-radius:20px;
+        padding:20px; margin-bottom:18px; box-shadow:var(--shadow);
+      }
+      .card h3{ margin:0 0 8px; font-size:21px; font-weight:800; }
+      .card h3 .step{
+        display:inline-block; background:var(--sun); color:#4A3200; border-radius:8px;
+        font-size:13px; padding:2px 9px; vertical-align:3px; margin-right:8px; font-weight:800;
+      }
+      .card p{ margin:6px 0; }
+      .zh-note{ color:var(--muted); font-size:15px; }
+      .en-term{ font-weight:800; }
+      .rule-box{
+        background:var(--card2); border-radius:14px; padding:14px 16px; margin:12px 0;
+        font-weight:700;
+      }
+      .rule-box .chant{ font-family:"Baloo 2"; font-size:19px; font-weight:800; color:var(--coral-d); }
+      @media (prefers-color-scheme: dark){ .rule-box .chant{ color:var(--sun); } }
+
+      /* ---------- buttons ---------- */
+      .btn{
+        font-family:inherit; font-weight:800; font-size:16px; cursor:pointer;
+        border:2px solid var(--line); background:var(--card); color:var(--ink);
+        border-radius:14px; padding:10px 18px; min-height:48px;
+        display:inline-flex; align-items:center; justify-content:center; gap:8px;
+        transition:transform .08s ease, background .15s ease;
+        touch-action:manipulation; user-select:none; -webkit-user-select:none;
+      }
+      .btn:active{ transform:scale(.96); }
+      .btn.primary{ background:var(--coral); border-color:var(--coral); color:#fff; }
+      .btn.teal{ background:var(--teal); border-color:var(--teal); color:#fff; }
+      .btn.sky{ background:var(--sky); border-color:var(--sky); color:#fff; }
+      .btn.ghost{ background:transparent; }
+      .btn:disabled{ opacity:.45; cursor:default; transform:none; }
+      .btnrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+      .feedback{ margin-top:12px; font-weight:800; font-size:17px; min-height:1.4em; }
+      .feedback.good{ color:var(--good); }
+      .feedback.bad{ color:var(--bad); }
+      .explain{
+        margin-top:10px; background:var(--card2); border-radius:12px; padding:12px 14px;
+        font-size:15.5px; display:none;
+      }
+      .explain.show{ display:block; }
+      .explain b{ color:var(--coral-d); }
+      @media (prefers-color-scheme: dark){ .explain b{ color:var(--sun); } }
+
+      /* ---------- choices / quiz ---------- */
+      .choices{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+      @media (max-width:520px){ .choices{ grid-template-columns:1fr; } }
+      .choice{
+        font-family:"Baloo 2"; font-size:21px; font-weight:700; padding:14px 12px;
+        border-radius:14px; border:3px solid var(--line); background:var(--card); color:var(--ink);
+        cursor:pointer; min-height:56px; touch-action:manipulation;
+      }
+      .choice:active{ transform:scale(.97); }
+      .choice.right{ border-color:var(--good); background:rgba(46,158,91,.14); }
+      .choice.wrong{ border-color:var(--bad); background:rgba(217,58,43,.12); }
+      .choice:disabled{ cursor:default; opacity:.85; }
+      .q-text{ font-size:19px; font-weight:700; }
+      .q-text .qnum{
+        display:inline-block; background:var(--teal); color:#fff; border-radius:8px;
+        padding:1px 10px; margin-right:8px; font-family:"Baloo 2"; font-size:16px; vertical-align:2px;
+      }
+      .q-zh{ color:var(--muted); font-size:15px; font-weight:600; margin-top:2px; }
+      .ans-input{
+        font-family:"Baloo 2"; font-size:24px; font-weight:700; text-align:center;
+        width:min(280px,100%); padding:10px; border-radius:14px;
+        border:3px solid var(--line); background:var(--card); color:var(--ink);
+      }
+      .ans-input:focus{ outline:none; border-color:var(--teal); }
+      .ans-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+
+      /* ---------- ordering game ---------- */
+      .order-pool{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+      .order-chip{
+        font-family:"Baloo 2"; font-size:21px; font-weight:700; padding:12px 16px; min-height:52px;
+        border-radius:14px; border:3px solid var(--line); background:var(--card2); color:var(--ink);
+        cursor:pointer; position:relative; touch-action:manipulation;
+      }
+      .order-chip .rank{
+        position:absolute; top:-11px; left:-9px; width:26px; height:26px; border-radius:50%;
+        background:var(--coral); color:#fff; font-size:15px; display:none; place-items:center; font-weight:800;
+      }
+      .order-chip.picked{ border-color:var(--coral); background:var(--card); }
+      .order-chip.picked .rank{ display:grid; }
+      .order-chip.right{ border-color:var(--good); }
+      .order-chip.wrong{ border-color:var(--bad); }
+
+      /* ---------- number lines ---------- */
+      .nl-wrap{ margin:26px 4px 8px; position:relative; }
+      .nl-track{
+        position:relative; height:10px; border-radius:5px; opacity:.9;
+      }
+      .nl-ticks{ position:relative; height:30px; }
+      .nl-tick{
+        position:absolute; top:0; transform:translateX(-50%); text-align:center;
+        font-size:12.5px; font-weight:800; color:var(--muted); width:34px;
+      }
+      .nl-tick::before{
+        content:""; display:block; width:2px; height:9px; background:var(--muted); margin:0 auto 2px;
+      }
+      .nl-tick.blank{ color:var(--coral); font-size:16px; }
+      .nl-marker{
+        position:absolute; top:-13px; transform:translateX(-50%);
+        transition:left .45s cubic-bezier(.34,1.4,.5,1); z-index:3;
+      }
+      .nl-marker .pin{
+        width:36px; height:36px; border-radius:50% 50% 50% 4px; transform:rotate(-45deg);
+        background:var(--sun); border:3px solid #fff; box-shadow:0 3px 8px rgba(0,0,0,.25);
+        display:grid; place-items:center;
+      }
+      .nl-marker .pin span{
+        transform:rotate(45deg); font-family:"Baloo 2"; font-weight:800; font-size:14px; color:#4A3200;
+      }
+      .nl-marker.b{ top:auto; bottom:-16px; z-index:2; }
+      .nl-marker.b .pin{ background:var(--sky); border-radius:4px 50% 50% 50%; }
+      .nl-marker.b .pin span{ color:#fff; }
+      .nl-pos{
+        text-align:center; font-family:"Baloo 2"; font-size:30px; font-weight:800; margin-top:16px;
+      }
+      .move-btns{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+      .move-btns button{
+        font-family:"Baloo 2"; font-size:19px; font-weight:800; min-width:64px; height:52px;
+        border-radius:14px; border:2px solid var(--line); cursor:pointer; touch-action:manipulation;
+        background:var(--card); color:var(--ink); padding:0 12px;
+      }
+      .move-btns button:active{ transform:scale(.94); }
+      .move-btns button.back{ background:rgba(62,146,204,.15); border-color:var(--sky); }
+      .move-btns button.fwd{ background:rgba(242,96,62,.13); border-color:var(--coral); }
+
+      /* rounding number line */
+      .rnl{ margin:30px 6px 4px; position:relative; }
+      .rnl-track{ position:relative; height:12px; border-radius:6px; background:var(--chip); border:2px solid var(--line); }
+      .rnl-fill{ position:absolute; top:0; bottom:0; left:0; border-radius:6px; background:var(--sun); opacity:.55; }
+      .rnl-band{ position:absolute; top:-4px; bottom:-4px; border-radius:6px; background:rgba(14,149,148,.4); border:2px solid var(--teal); }
+      .rnl-dot{
+        position:absolute; top:50%; width:30px; height:30px; border-radius:50%;
+        background:var(--coral); border:3px solid #fff; box-shadow:0 3px 8px rgba(0,0,0,.25);
+        transform:translate(-50%,-50%); transition:left .3s ease; z-index:2;
+      }
+      .rnl-mid{
+        position:absolute; top:-8px; bottom:-8px; width:0; border-left:3px dashed var(--muted);
+        transform:translateX(-50%);
+      }
+      .rnl-labels{ position:relative; height:30px; margin-top:10px; font-family:"Baloo 2"; font-weight:800; font-size:16px; }
+      .rnl-labels span{ position:absolute; transform:translateX(-50%); white-space:nowrap; }
+      .rnl-labels .lo{ left:0; transform:none; }
+      .rnl-labels .hi{ right:0; left:auto; transform:none; }
+      .rnl-labels .midlab{ color:var(--muted); font-size:14px; }
+      .rnl-labels2{ position:relative; height:26px; font-family:"Baloo 2"; font-weight:800; font-size:15px; color:var(--teal-d); }
+      .rnl-labels2 span{ position:absolute; transform:translateX(-50%); white-space:nowrap; }
+      input[type="range"]{ width:100%; accent-color:var(--coral); height:44px; }
+      .target-btns{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+      .target-btns button{
+        font-family:"Baloo 2"; font-weight:800; font-size:17px; padding:10px 16px; min-height:48px;
+        border-radius:12px; border:3px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+        touch-action:manipulation;
+      }
+      .target-btns button.on{ border-color:var(--coral); background:rgba(242,96,62,.13); }
+      .steps-list{ list-style:none; margin:14px 0 0; padding:0; counter-reset:st; }
+      .steps-list li{
+        padding:12px 14px 12px 52px; position:relative; background:var(--card2);
+        border-radius:12px; margin-bottom:10px; font-weight:600;
+      }
+      .steps-list li::before{
+        counter-increment:st; content:counter(st);
+        position:absolute; left:12px; top:10px; width:30px; height:30px; border-radius:50%;
+        background:var(--coral); color:#fff; font-family:"Baloo 2"; font-weight:800;
+        display:grid; place-items:center; font-size:16px;
+      }
+      .steps-list .digit-hl{
+        font-family:"Baloo 2"; font-weight:800; font-size:1.3em; padding:0 5px; border-radius:6px;
+        background:var(--sun); color:#4A3200;
+      }
+      .steps-list .digit-hl.blue{ background:var(--sky); color:#fff; }
+      .steps-list li.dim{ opacity:.45; }
+      .crossed{ text-decoration:line-through; text-decoration-color:var(--bad); text-decoration-thickness:3px; }
+
+      /* ---------- digit detective ---------- */
+      .digit-row{ display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:16px 0 4px; }
+      .digit-btn{
+        font-family:"Baloo 2"; font-size:clamp(30px,8vw,44px); font-weight:800; line-height:1;
+        min-width:52px; height:68px; padding:6px 4px; border-radius:14px; cursor:pointer;
+        border:3px solid var(--line); background:var(--card2); color:var(--ink); touch-action:manipulation;
+        display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+      }
+      .digit-btn small{ font-size:10.5px; font-family:"Nunito"; font-weight:800; color:var(--muted); }
+      .digit-btn:active{ transform:scale(.95); }
+      .digit-btn.target-digit{ border-color:var(--sky); background:rgba(62,146,204,.15); }
+      .digit-btn.decider{ border-color:var(--sun); background:rgba(255,182,39,.3); }
+      .digit-btn.wrongpick{ border-color:var(--bad); background:rgba(217,58,43,.12); }
+      .digit-btn:disabled{ cursor:default; }
+      .big-display{ text-align:center; margin:18px 0 4px; }
+      .big-display .big-num{ font-size:clamp(38px,9vw,58px); font-weight:800; letter-spacing:1px; }
+
+      /* ---------- roman numerals ---------- */
+      .roman-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:10px; margin-top:14px; }
+      .roman-cell{
+        background:var(--card2); border:2px solid var(--line); border-radius:16px;
+        padding:12px 6px 10px; text-align:center;
+      }
+      .roman-cell .sym{ font-family:"Baloo 2"; font-size:40px; font-weight:800; color:var(--teal-d); line-height:1; }
+      @media (prefers-color-scheme: dark){ .roman-cell .sym{ color:var(--teal-d); } }
+      .roman-cell .val{ font-family:"Baloo 2"; font-size:22px; font-weight:800; margin-top:4px; }
+      .roman-cell .memo{ font-size:12.5px; color:var(--muted); font-weight:700; margin-top:2px; }
+      .decomp{ margin-top:14px; display:none; }
+      .decomp.show{ display:block; }
+      .decomp-row{
+        display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+        background:var(--card2); border-radius:12px; padding:10px 14px; margin-bottom:8px;
+        font-family:"Baloo 2"; font-size:20px; font-weight:700;
+      }
+      .decomp-row .arr{ color:var(--muted); }
+      .decomp-row .rom{ color:var(--teal-d); font-weight:800; }
+      .decomp-total{
+        text-align:center; font-family:"Baloo 2"; font-size:clamp(24px,6vw,34px); font-weight:800; margin-top:10px;
+      }
+      .decomp-total .rom{ color:var(--teal-d); }
+
+      /* ---------- factors ---------- */
+      .pair-list{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+      .pair-chip{
+        font-family:"Baloo 2"; font-size:20px; font-weight:800; padding:10px 16px; min-height:52px;
+        border-radius:14px; border:3px solid var(--teal); background:rgba(14,149,148,.1); color:var(--ink);
+        display:inline-flex; align-items:center; gap:6px;
+      }
+      .pair-chip .eq{ color:var(--muted); font-size:16px; }
+      .dotbox{ margin-top:14px; display:none; }
+      .dotbox.show{ display:block; }
+      .dotgrid{ display:grid; gap:5px; justify-content:center; margin:10px auto; width:fit-content; max-width:100%; }
+      .dotgrid i{ width:14px; height:14px; border-radius:50%; background:var(--sun); border:2px solid rgba(34,48,74,.15); display:block; }
+      .factor-list{
+        margin-top:12px; font-family:"Baloo 2"; font-size:20px; font-weight:800; text-align:center;
+        background:var(--card2); border-radius:14px; padding:12px; display:none;
+      }
+      .factor-list.show{ display:block; }
+      .mult-row{ display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 14px; align-items:center; }
+      .mult-row .mlab{ font-family:"Baloo 2"; font-weight:800; font-size:17px; margin-right:4px; }
+      .mult-num{
+        font-family:"Baloo 2"; font-weight:700; font-size:17px; min-width:44px; text-align:center;
+        padding:6px 8px; border-radius:10px; background:var(--card2); border:2px solid var(--line);
+      }
+      .mult-num.common{ background:var(--sun); border-color:var(--sun); color:#4A3200; }
+      .mult-num.the-one{ background:var(--teal); border-color:var(--teal); color:#fff; }
+
+      /* ---------- sieve ---------- */
+      .sieve-grid{ display:grid; grid-template-columns:repeat(10,1fr); gap:6px; margin-top:14px; }
+      @media (max-width:560px){ .sieve-grid{ grid-template-columns:repeat(5,1fr); } }
+      .sieve-btn{
+        font-family:"Baloo 2"; font-size:18px; font-weight:800; height:48px; border-radius:12px;
+        border:3px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+        touch-action:manipulation; padding:0;
+      }
+      .sieve-btn:active{ transform:scale(.93); }
+      .sieve-btn.picked{ border-color:var(--teal); background:rgba(14,149,148,.18); }
+      .sieve-btn.right{ border-color:var(--good); background:rgba(46,158,91,.2); }
+      .sieve-btn.wrong{ border-color:var(--bad); background:rgba(217,58,43,.15); }
+      .sieve-btn.missed{ border-color:var(--sun); background:rgba(255,182,39,.25); border-style:dashed; }
+      .sieve-btn:disabled{ cursor:default; opacity:.9; }
+
+      /* ---------- quiz ---------- */
+      .progress-outer{ height:16px; border-radius:8px; background:var(--chip); border:2px solid var(--line); overflow:hidden; margin:12px 0 4px; }
+      .progress-inner{ height:100%; background:var(--teal); width:0%; transition:width .4s ease; border-radius:6px; }
+      .score-line{ display:flex; justify-content:space-between; font-weight:800; font-size:15px; color:var(--muted); }
+      .skill-row{ display:flex; align-items:center; gap:12px; margin:10px 0; }
+      .skill-row .sname{ flex:0 0 128px; font-weight:800; font-size:15px; }
+      .skill-row .sbar{ flex:1; height:18px; border-radius:9px; background:var(--chip); border:2px solid var(--line); overflow:hidden; }
+      .skill-row .sfill{ height:100%; background:var(--good); }
+      .skill-row .sfill.weak{ background:var(--sun); }
+      .skill-row .sscore{ flex:0 0 52px; text-align:right; font-family:"Baloo 2"; font-weight:800; }
+      .skill-note{ font-size:14.5px; color:var(--muted); margin:2px 0 12px 0; }
+      .stars{ font-size:34px; letter-spacing:4px; text-align:center; }
+      footer{ text-align:center; color:var(--muted); font-size:14px; margin-top:40px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <h1>四舍五入 &amp; 负数加强 + 罗马数字、因数与质数<br /><span class="en">Lesson 2 — Rounding &amp; Negatives Level Up, Roman Numerals, Factors &amp; Primes</span></h1>
+        <p>第二课：先把昨天的四舍五入和负数练到更难的一档，再学两个新知识 —— 罗马数字（Roman numerals）和因数、倍数与质数（Factors, multiples &amp; primes）。还是老规矩：先动手玩懂方法，再做考试题。</p>
+        <div class="tagrow">
+          <span class="tag">🎯 Rounding 加强：逆向四舍五入</span>
+          <span class="tag">🎯 Negative numbers 加强：跨 0 计算</span>
+          <span class="tag">🆕 Roman numerals 罗马数字</span>
+          <span class="tag">🆕 Factors, multiples &amp; primes</span>
+        </div>
+      </header>
+
+      <nav class="toc" aria-label="本页目录">
+        <a href="#round">A · 四舍五入加强 Rounding+</a>
+        <a href="#neg">B · 负数加强 Negatives+</a>
+        <a href="#roman">C · 罗马数字 Roman Numerals</a>
+        <a href="#factor">D · 因数·倍数·质数 Factors &amp; Primes</a>
+        <a href="#quiz">🏆 期末挑战 Final Challenge</a>
+      </nav>
+
+      <!-- ================= TOPIC A : ROUNDING LEVEL UP ================= -->
+      <section id="round">
+        <div class="sec-head">
+          <div class="sec-badge badge-a">A</div>
+          <h2>四舍五入加强：先找对「决定位」<span class="en">Rounding Level Up — mixed targets &amp; reverse rounding</span></h2>
+        </div>
+        <p class="sec-sub">昨天的规则不变：<b>只看目标位右边一位</b>（the deciding digit）—— ≥5 进位，≤4 舍去。今天难在：同一个数要能换着目标舍，而且要会「倒着想」。</p>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>决定位侦探 Digit Detective</h3>
+          <p>同一个数，目标不同，要看的决定位也不同。先选目标，再<b>点一点你认为的决定位</b>（目标位右边那一位），点对了再选答案。</p>
+          <p class="q-text" id="ddQ"></p>
+          <div class="digit-row" id="ddDigits"></div>
+          <div class="target-btns" id="ddTargets" style="justify-content:center"></div>
+          <div id="ddStep2" style="display:none">
+            <p class="q-text" style="margin-top:14px">决定位是 <span id="ddDecider"></span>，进还是舍？选出四舍五入后的数：</p>
+            <div class="choices" id="ddChoices"></div>
+          </div>
+          <div class="feedback" id="ddFb"></div>
+          <div class="explain" id="ddEx"></div>
+          <div class="btnrow">
+            <button class="btn primary" id="ddNew" type="button">🎲 换一个数 New number</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">学一学</span>逆向四舍五入：倒着想 Reverse Rounding</h3>
+          <p>考试很爱这样问：<span class="en-term">“A number rounded to the nearest 100 is 4,500. What is the smallest / largest number it could be?”</span></p>
+          <p>想一想：哪些数舍到最近的 100 会变成 4,500？从正中间 4,500 往两边走，<b>走半格（50）就到边界</b>：</p>
+          <ol class="steps-list">
+            <li>下边界：4,500 − 50 = <span class="digit-hl">4,450</span>。4,450 的决定位正好是 5，<b>5 要进位</b>，所以 4,450 会舍成 4,500 —— 它是最小的可能。</li>
+            <li>上边界：4,500 + 50 = 4,550，但 4,550 会舍成 4,600（决定位 5 进位），所以要退回一格：<span class="digit-hl blue">4,549</span> 是最大的可能。</li>
+            <li>口诀：<span class="en-term">smallest = rounded − half the unit</span>（减半格）；<span class="en-term">largest = rounded + half the unit − 1</span>（加半格再减 1）。</li>
+          </ol>
+          <div class="rnl">
+            <div class="rnl-track">
+              <div class="rnl-band" id="rrBand"></div>
+              <div class="rnl-mid" style="left:50%"></div>
+            </div>
+            <div class="rnl-labels">
+              <span class="lo" id="rrLo"></span>
+              <span class="midlab" style="left:50%" id="rrMid"></span>
+              <span class="hi" id="rrHi"></span>
+            </div>
+            <div class="rnl-labels2">
+              <span id="rrSmall" style="color:var(--teal-d)"></span>
+              <span id="rrLarge"></span>
+            </div>
+          </div>
+          <p class="zh-note" id="rrNote"></p>
+          <div class="target-btns" id="rrTargets"></div>
+          <div class="btnrow">
+            <button class="btn" id="rrNew" type="button">🎲 换一个例子 Another example</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">试一试</span>逆向四舍五入练习</h3>
+          <p class="q-text" id="rpQ"></p>
+          <p class="q-zh" id="rpQZh"></p>
+          <div class="ans-row">
+            <input class="ans-input" id="rpInput" inputmode="numeric" autocomplete="off" aria-label="你的答案" />
+            <button class="btn teal" id="rpCheck" type="button">检查 Check</button>
+            <button class="btn ghost" id="rpNext" type="button">再来一题 Another one →</button>
+          </div>
+          <div class="feedback" id="rpFb"></div>
+          <div class="explain" id="rpEx"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">学一学</span>两个大坑：看错位 &amp; 舍两次</h3>
+          <p><b>坑 1：看错决定位。</b>把 4,549 舍到最近的 1,000 —— 有人去看个位/十位的 4，舍成了 4,000。错！目标是千位，就<b>只看百位</b>：百位是 <span class="en-term">5</span>，进位 → <b>5,000</b>。十位、个位是多少根本不用看。</p>
+          <p><b>坑 2：链式四舍五入（rounding twice）。</b>把 4,499 舍到最近的 1,000：</p>
+          <ol class="steps-list">
+            <li class="dim">错误做法：先舍到最近的 100 → 4,500，再舍到最近的 1,000 → <span class="crossed">5,000</span>。每舍一次都会「爬高」一点，最后爬过头。</li>
+            <li>正确做法：一步到位，只看百位。百位是 <span class="digit-hl">4</span>，≤4 舍去 → <span class="digit-hl blue">4,000</span>。</li>
+          </ol>
+          <div class="rule-box"><span class="chant">一次看一位，一步舍到位。</span><br />One look, one step: only the digit next to your target place decides.</div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">试一试</span>应用题与陷阱题 Word Problems &amp; Traps</h3>
+          <p class="q-text" id="wpQ"></p>
+          <p class="q-zh" id="wpQZh"></p>
+          <div class="choices" id="wpChoices"></div>
+          <div class="feedback" id="wpFb"></div>
+          <div class="explain" id="wpEx"></div>
+          <div class="btnrow"><button class="btn teal" id="wpNext" type="button">再来一题 Another one →</button></div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC B : NEGATIVES LEVEL UP ================= -->
+      <section id="neg">
+        <div class="sec-head">
+          <div class="sec-badge badge-b">B</div>
+          <h2>负数加强：排序、温差与跨 0 计算<span class="en">Negative Numbers Level Up — ordering, differences &amp; crossing zero</span></h2>
+        </div>
+        <p class="sec-sub">记住一条：数轴上<b>越往左越小、越往右越大</b>。负数比大小看「离 0 的距离」：−12 比 −7 更左，所以 −12 更小（更冷）。</p>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>混合排序：从小到大点出来</h3>
+          <p><span class="en-term">Put these numbers in order, smallest first.</span> 按从小到大的顺序依次点下面的数。</p>
+          <div class="order-pool" id="noPool"></div>
+          <div class="feedback" id="noFb"></div>
+          <div class="explain" id="noEx"></div>
+          <div class="btnrow">
+            <button class="btn primary" id="noCheck" type="button">检查 Check</button>
+            <button class="btn" id="noReset" type="button">重新点 Start again</button>
+            <button class="btn teal" id="noNew" type="button">换一组 New set</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>温差实验室：两个负数之间差多少？</h3>
+          <p>选两个温度（可以都是负数），点「数格子」看黄色小点一步一步走完，走了几格，温差就是几度。<span class="en-term">Difference</span> 永远是正数：从小的走到大的。</p>
+          <div class="ans-row" style="justify-content:center">
+            <label style="font-weight:800">温度 A
+              <select id="diffA" class="ans-input" style="width:130px;font-size:20px;margin-left:6px"></select>
+            </label>
+            <label style="font-weight:800">温度 B
+              <select id="diffB" class="ans-input" style="width:130px;font-size:20px;margin-left:6px"></select>
+            </label>
+          </div>
+          <div class="nl-wrap">
+            <div class="nl-track" id="diffTrack"></div>
+            <div class="nl-marker" id="diffMarker"><div class="pin"><span id="diffPinVal"></span></div></div>
+            <div class="nl-ticks" id="diffTicks"></div>
+          </div>
+          <div class="nl-pos" id="diffPos"></div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn sky" id="diffCount" type="button">👣 数格子 Count the jumps</button>
+            <button class="btn ghost" id="diffReset" type="button">重置 Reset</button>
+          </div>
+          <div class="feedback" id="diffFb" style="text-align:center"></div>
+          <div class="explain" id="diffEx"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">学一学</span>数轴计算：跨过 0 的加减法</h3>
+          <p>加法往右走，减法往左走，<b>路过 0 不用停</b>。点一个算式，看小点怎么走：</p>
+          <div class="target-btns" id="calcChips" style="justify-content:center"></div>
+          <div class="nl-wrap">
+            <div class="nl-track" id="calcTrack"></div>
+            <div class="nl-marker" id="calcMarker"><div class="pin"><span id="calcPinVal">0</span></div></div>
+            <div class="nl-ticks" id="calcTicks"></div>
+          </div>
+          <div class="nl-pos" id="calcPos">点一个算式开始</div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn primary" id="calcPlay" type="button">▶ 再走一遍 Walk it again</button>
+          </div>
+          <div class="explain show" id="calcEx">小窍门：先走到 0，再继续走剩下的。比如 −3 + 5：先走 3 格到 0，还剩 2 格，走到 2。</div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">试一试</span>负数综合练习</h3>
+          <p class="q-text" id="npQ"></p>
+          <p class="q-zh" id="npQZh"></p>
+          <div id="npBody"></div>
+          <div class="feedback" id="npFb"></div>
+          <div class="explain" id="npEx"></div>
+          <div class="btnrow"><button class="btn teal" id="npNext" type="button">再来一题 Another one →</button></div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC C : ROMAN NUMERALS ================= -->
+      <section id="roman">
+        <div class="sec-head">
+          <div class="sec-badge badge-c">C</div>
+          <h2>新知识 1：罗马数字到 1,000<span class="en">Roman Numerals — up to M (1,000)</span></h2>
+        </div>
+        <p class="sec-sub">古罗马人没有 0，也不用数位，他们把几个字母像积木一样拼起来表示数。只要记住 7 个符号和 3 条规则，1 到 1,000 都能拼。</p>
+
+        <div class="card">
+          <h3><span class="step">学一学</span>七个符号 The Seven Symbols</h3>
+          <div class="roman-grid">
+            <div class="roman-cell"><div class="sym">I</div><div class="val">1</div><div class="memo">一根手指</div></div>
+            <div class="roman-cell"><div class="sym">V</div><div class="val">5</div><div class="memo">一只手张开</div></div>
+            <div class="roman-cell"><div class="sym">X</div><div class="val">10</div><div class="memo">两只手交叉</div></div>
+            <div class="roman-cell"><div class="sym">L</div><div class="val">50</div><div class="memo">记：L 在 C 的一半路</div></div>
+            <div class="roman-cell"><div class="sym">C</div><div class="val">100</div><div class="memo">Cent = 100（如 century 世纪）</div></div>
+            <div class="roman-cell"><div class="sym">D</div><div class="val">500</div><div class="memo">C 的五倍</div></div>
+            <div class="roman-cell"><div class="sym">M</div><div class="val">1,000</div><div class="memo">Mille = 1000（如 millennium 千年）</div></div>
+          </div>
+          <ol class="steps-list">
+            <li><b>加法规则</b>：小符号跟在大符号<b>后面</b>就相加。VI = 5 + 1 = <span class="digit-hl">6</span>；LX = 50 + 10 = <span class="digit-hl">60</span>；XXVII = 10 + 10 + 5 + 1 + 1 = 27。</li>
+            <li><b>减法规则</b>：小符号跑到大符号<b>前面</b>就相减。但只有 6 对可以这样用：<span class="digit-hl blue">IV=4, IX=9, XL=40, XC=90, CD=400, CM=900</span>。诀窍：只有 I、X、C 能站在前面「减」，而且只能减它后面那一级。</li>
+            <li><b>最多连写 3 个</b>：同一个符号最多重复 3 次。III = 3 可以，但 4 不能写 IIII，要写 <span class="digit-hl">IV</span>；40 写 XL 不写 XXXX。</li>
+          </ol>
+          <div class="rule-box"><span class="chant">后面加，前面减，最多连三遍。</span><br />Smaller after = add, smaller before = subtract, never more than three in a row.</div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>拼搭机：把数字拆开拼 Build a Numeral</h3>
+          <p>秘诀和数位一样：<b>按千、百、十、个一段一段拼</b>。选一个数字，看它怎么拆：</p>
+          <div class="target-btns" id="rbChips" style="justify-content:center"></div>
+          <div class="big-display"><div class="big-num" id="rbNum">472</div></div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn teal" id="rbBuild" type="button">🧩 一段一段拼 Build it</button>
+            <button class="btn" id="rbRandom" type="button">🎲 随机一个 Random</button>
+          </div>
+          <div class="decomp" id="rbDecomp"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>解码器：读懂罗马数字 Decode a Numeral</h3>
+          <p>输入一个罗马数字（只能用 I V X L C D M），点解码，看它一段一段值多少：</p>
+          <div class="ans-row" style="justify-content:center">
+            <input class="ans-input" id="rdInput" value="CMXLIV" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase" aria-label="输入罗马数字" />
+            <button class="btn teal" id="rdGo" type="button">🔍 解码 Decode</button>
+          </div>
+          <div class="target-btns" id="rdChips" style="justify-content:center"></div>
+          <div class="decomp" id="rdDecomp"></div>
+          <div class="feedback" id="rdFb" style="text-align:center"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">试一试</span>罗马数字练习</h3>
+          <p class="q-text" id="roQ"></p>
+          <p class="q-zh" id="roQZh"></p>
+          <div class="choices" id="roChoices"></div>
+          <div class="feedback" id="roFb"></div>
+          <div class="explain" id="roEx"></div>
+          <div class="btnrow"><button class="btn teal" id="roNext" type="button">再来一题 Another one →</button></div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC D : FACTORS, MULTIPLES & PRIMES ================= -->
+      <section id="factor">
+        <div class="sec-head">
+          <div class="sec-badge badge-d">D</div>
+          <h2>新知识 2：因数、倍数与质数<span class="en">Factors, Multiples, HCF, LCM &amp; Prime Numbers</span></h2>
+        </div>
+        <p class="sec-sub">三个词先分清：<span class="en-term">factor 因数</span>是「能整除这个数的数」，成对出现；<span class="en-term">multiple 倍数</span>是「这个数乘出来的结果」，有无限个；<span class="en-term">prime number 质数</span>是「只有 2 个因数的数」。</p>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>因数彩虹：成对找因数 Factor Pairs</h3>
+          <p>找因数要<b>成对找</b>：从 1 开始试除，能整除就收下一对，像彩虹两端一样。选一个数，一对一对找出来 —— 点阵图会告诉你这一对是什么意思：几行 × 几列正好摆满。</p>
+          <div class="target-btns" id="ffChips" style="justify-content:center"></div>
+          <div class="big-display"><div class="big-num" id="ffNum">36</div></div>
+          <div class="pair-list" id="ffPairs" style="justify-content:center"></div>
+          <div class="dotbox" id="ffDots">
+            <p class="zh-note" style="text-align:center" id="ffDotNote"></p>
+            <div class="dotgrid" id="ffDotGrid"></div>
+          </div>
+          <div class="factor-list" id="ffList"></div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn primary" id="ffNext" type="button">找下一对 Find the next pair →</button>
+            <button class="btn ghost" id="ffRestart" type="button">重新找 Start again</button>
+          </div>
+          <div class="feedback" id="ffFb" style="text-align:center"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">学一学</span>列举法：找 LCM 和 HCF Listing Method</h3>
+          <p><span class="en-term">LCM (lowest common multiple) 最小公倍数</span>：把两个数的倍数列出来，第一个相同的就是。点下面的按钮切换例子，看黄色的是公倍数，绿色的是最小的那个。</p>
+          <div class="target-btns" id="lcmChips" style="justify-content:center"></div>
+          <div id="lcmBody" style="margin-top:10px"></div>
+          <p style="margin-top:16px"><span class="en-term">HCF (highest common factor) 最大公因数</span>：把两个数的因数列出来，相同的里面最大的就是。</p>
+          <div class="target-btns" id="hcfChips" style="justify-content:center"></div>
+          <div id="hcfBody" style="margin-top:10px"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">试一试</span>应用题：什么时候一起到？怎么分才公平？</h3>
+          <p class="q-text" id="fwQ"></p>
+          <p class="q-zh" id="fwQZh"></p>
+          <div class="ans-row">
+            <input class="ans-input" id="fwInput" inputmode="numeric" autocomplete="off" aria-label="你的答案" />
+            <span style="font-weight:800" id="fwUnit"></span>
+            <button class="btn teal" id="fwCheck" type="button">检查 Check</button>
+            <button class="btn ghost" id="fwNext" type="button">再来一题 Another one →</button>
+          </div>
+          <div class="feedback" id="fwFb"></div>
+          <div class="explain" id="fwEx"></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">学一学</span>质数与合数 Prime vs Composite</h3>
+          <ol class="steps-list">
+            <li><span class="en-term">Prime number 质数</span>：恰好有 <span class="digit-hl">2 个</span>因数 —— 1 和它自己。比如 7 的因数只有 1 和 7。</li>
+            <li><span class="en-term">Composite number 合数</span>：因数超过 2 个。比如 9 的因数有 1、3、9。</li>
+            <li>两个特殊情况要记牢：<span class="digit-hl blue">1 既不是质数也不是合数</span>（它只有 1 个因数）；<span class="digit-hl blue">2 是唯一的偶质数</span>，其他偶数都有因数 2，都是合数。</li>
+          </ol>
+          <p class="zh-note">小提醒：以后会学的平方数（如 36 = 6 × 6）的因数个数总是奇数个 —— 今天先知道有这回事就行。</p>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">玩一玩</span>质数筛：把 1–50 的质数全点出来</h3>
+          <p>古希腊人 Eratosthenes 的办法：划掉所有倍数，剩下的就是质数。<b>点出你认为是质数的所有数</b>（点错可以再点一下取消），然后检查。小心：1 不是质数哦。</p>
+          <div class="sieve-grid" id="sieveGrid"></div>
+          <div class="feedback" id="sieveFb"></div>
+          <div class="explain" id="sieveEx"></div>
+          <div class="btnrow">
+            <button class="btn primary" id="sieveCheck" type="button">检查 Check</button>
+            <button class="btn ghost" id="sieveReset" type="button">重新玩 Start again</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">试一试</span>因数·倍数·质数练习</h3>
+          <p class="q-text" id="fpQ"></p>
+          <p class="q-zh" id="fpQZh"></p>
+          <div class="choices" id="fpChoices"></div>
+          <div class="feedback" id="fpFb"></div>
+          <div class="explain" id="fpEx"></div>
+          <div class="btnrow"><button class="btn teal" id="fpNext" type="button">再来一题 Another one →</button></div>
+        </div>
+      </section>
+
+      <!-- ================= FINAL CHALLENGE ================= -->
+      <section id="quiz">
+        <div class="sec-head">
+          <div class="sec-badge badge-c">🏆</div>
+          <h2>期末挑战：考试风格练习<span class="en">Final Challenge — 20 exam-style questions</span></h2>
+        </div>
+        <p class="sec-sub">四项技能混合出题：四舍五入、负数、罗马数字、因数与质数各 5 题。每题答完立刻批改并讲方法，最后有分项总结。</p>
+
+        <div class="card" id="quizCard">
+          <div class="score-line"><span id="qProgress">第 1 / 20 题</span><span id="qScore">⭐ 得分 Score: 0</span></div>
+          <div class="progress-outer"><div class="progress-inner" id="qBar"></div></div>
+          <div id="qBody" style="margin-top:16px"></div>
+          <div class="feedback" id="qFb"></div>
+          <div class="explain" id="qEx"></div>
+          <div class="btnrow">
+            <button class="btn primary" id="qNext" type="button" style="display:none">下一题 Next →</button>
+          </div>
+        </div>
+
+        <div class="card" id="resultCard" style="display:none">
+          <h3 style="text-align:center">挑战完成！Challenge Complete 🎉</h3>
+          <div class="stars" id="resStars"></div>
+          <p style="text-align:center;font-size:20px;font-weight:800" id="resLine"></p>
+          <p class="zh-note" style="text-align:center">分项成绩 Skill breakdown —— 哪一项的条最短，就回上面多练那一项。</p>
+          <div id="resSkills"></div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn primary" id="quizRestart" type="button">🔁 再挑战一次 Try again</button>
+          </div>
+        </div>
+      </section>
+
+      <footer>11+ Maths · Year 5 · Lesson 2 —— 下一课预告：平方数与立方数（square &amp; cube numbers）、四则运算列式。</footer>
+    </main>
+
+    <script>
+      var $ = function (id) { return document.getElementById(id); };
+      function fmt(n) { return n.toLocaleString("en-GB"); }
+      function fmtNeg(n) { return n < 0 ? "−" + Math.abs(n) : "" + n; }
+      function shuffle(a) {
+        var arr = a.slice();
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+        }
+        return arr;
+      }
+      function randInt(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+      function pick(arr) { return arr[randInt(0, arr.length - 1)]; }
+      var PRAISE = ["太棒了！", "答对了，方法也对！", "非常好！", "就是这样！", "厉害！"];
+      function praise() { return pick(PRAISE); }
+      function parseAns(s) {
+        if (s === null || s === undefined) return NaN;
+        s = ("" + s).replace(/[,\s]/g, "").replace(/−/g, "-").replace(/£/g, "");
+        if (s === "") return NaN;
+        var v = Number(s);
+        return isNaN(v) ? NaN : v;
+      }
+      function roundTo(n, pow) { var u = Math.pow(10, pow); return Math.round(n / u) * u; }
+      var POW_NAMES = { 1: "10", 2: "100", 3: "1,000", 4: "10,000", 5: "100,000" };
+      var PLACE_NAMES = { 0: "个位 ones", 1: "十位 tens", 2: "百位 hundreds", 3: "千位 thousands", 4: "万位 ten-thousands", 5: "十万位 hundred-thousands" };
+
+      /* ================================================================
+         A1 · DIGIT DETECTIVE
+      ================================================================ */
+      var dd = { num: 0, pow: 3, stage: 0 };
+      function ddRenderDigits() {
+        var box = $("ddDigits"); box.innerHTML = "";
+        var s = "" + dd.num, L = s.length;
+        for (var i = 0; i < L; i++) {
+          (function (i) {
+            var pow = L - 1 - i;
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "digit-btn";
+            b.innerHTML = s[i] + "<small>" + PLACE_NAMES[pow].split(" ")[0] + "</small>";
+            if (pow === dd.pow) b.classList.add("target-digit");
+            b.addEventListener("click", function () { ddTap(pow, b); });
+            box.appendChild(b);
+          })(i);
+        }
+      }
+      function ddQuestion() {
+        $("ddQ").innerHTML = "Round <b>" + fmt(dd.num) + "</b> to the nearest <b>" + POW_NAMES[dd.pow] + "</b>. First, tap the <b>deciding digit</b>.";
+      }
+      function ddSetup(num, pow) {
+        dd.num = num; dd.pow = pow; dd.stage = 1;
+        $("ddFb").textContent = ""; $("ddFb").className = "feedback";
+        $("ddEx").className = "explain"; $("ddEx").innerHTML = "";
+        $("ddStep2").style.display = "none";
+        var tb = $("ddTargets"); tb.innerHTML = "";
+        [1, 2, 3, 4, 5].forEach(function (p) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = "nearest " + POW_NAMES[p];
+          if (p === dd.pow) b.classList.add("on");
+          b.addEventListener("click", function () { ddSetup(dd.num, p); });
+          tb.appendChild(b);
+        });
+        ddQuestion(); ddRenderDigits();
+      }
+      function ddTap(pow, btn) {
+        if (dd.stage !== 1) return;
+        var need = dd.pow - 1;
+        if (pow === need) {
+          dd.stage = 2;
+          btn.classList.add("decider");
+          $("ddDigits").querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+          var s = "" + dd.num, L = s.length;
+          var d = +s[L - 1 - need];
+          $("ddDecider").textContent = d;
+          $("ddFb").textContent = "找对了！决定位是 " + PLACE_NAMES[need] + " 的 " + d + "。";
+          $("ddFb").className = "feedback good";
+          ddChoices(d);
+        } else {
+          btn.classList.add("wrongpick");
+          $("ddFb").textContent = pow === dd.pow
+            ? "这是目标位本身 —— 要看它右边一位才决定进舍。再试试！"
+            : "不对哦。目标是 " + POW_NAMES[dd.pow] + "，就看它右边一位（" + PLACE_NAMES[need] + "）。再试试！";
+          $("ddFb").className = "feedback bad";
+          setTimeout(function () { btn.classList.remove("wrongpick"); }, 700);
+        }
+      }
+      function ddChoices(d) {
+        $("ddStep2").style.display = "block";
+        var u = Math.pow(10, dd.pow);
+        var ans = roundTo(dd.num, dd.pow);
+        var lo = Math.floor(dd.num / u) * u;
+        var others = [lo, lo + u, ans + u, ans - u];
+        var set = [ans];
+        others.forEach(function (v) { if (set.indexOf(v) < 0 && set.length < 3 && v >= 0) set.push(v); });
+        var box = $("ddChoices"); box.innerHTML = "";
+        shuffle(set).forEach(function (v) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "choice"; b.textContent = fmt(v);
+          b.addEventListener("click", function () {
+            box.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+            var ex = $("ddEx");
+            if (v === ans) {
+              b.classList.add("right");
+              $("ddFb").textContent = praise() + " " + fmt(dd.num) + " → " + fmt(ans);
+              $("ddFb").className = "feedback good";
+              ex.innerHTML = "方法：目标是最近的 " + POW_NAMES[dd.pow] + "，看决定位（" + PLACE_NAMES[dd.pow - 1] + "）是 <b>" + d + "</b>，" + (d >= 5 ? "≥5，进位" : "≤4，舍去") + "，所以得到 <b>" + fmt(ans) + "</b>。只看这一位，其他位不用管。";
+            } else {
+              b.classList.add("wrong");
+              box.querySelectorAll("button").forEach(function (x) { if (+x.textContent.replace(/,/g, "") === ans) x.classList.add("right"); });
+              $("ddFb").textContent = "再想想：决定位是 " + d + "，" + (d >= 5 ? "要进位" : "要舍去") + "。";
+              $("ddFb").className = "feedback bad";
+              ex.innerHTML = "正确答案是 <b>" + fmt(ans) + "</b>：决定位 " + d + " " + (d >= 5 ? "≥ 5 → 往上舍到" : "≤ 4 → 往下舍到") + " " + fmt(ans) + "。记住只看目标位右边一位。";
+            }
+            ex.classList.add("show");
+          });
+          box.appendChild(b);
+        });
+      }
+      $("ddNew").addEventListener("click", function () { ddSetup(randInt(100000, 999999), randInt(1, 5)); });
+      ddSetup(473826, 3);
+
+      /* ================================================================
+         A2 · REVERSE ROUNDING DEMO + PRACTICE
+      ================================================================ */
+      var rr = { rounded: 4500, pow: 2 };
+      function rrRender() {
+        var u = Math.pow(10, rr.pow), R = rr.rounded, half = u / 2;
+        var small = R - half, large = R + half - 1;
+        $("rrLo").textContent = fmt(R - u);
+        $("rrMid").textContent = fmt(R);
+        $("rrHi").textContent = fmt(R + u);
+        $("rrBand").style.left = "25%";
+        $("rrBand").style.width = "50%";
+        var smallPct = ((small - (R - u)) / (2 * u)) * 100;
+        var largePct = ((large - (R - u)) / (2 * u)) * 100;
+        var sEl = $("rrSmall"), lEl = $("rrLarge");
+        sEl.style.left = smallPct + "%"; sEl.textContent = "▲ 最小 " + fmt(small);
+        lEl.style.left = largePct + "%"; lEl.textContent = "最大 " + fmt(large) + " ▲";
+        $("rrNote").textContent = "蓝色带子里的数，舍到最近的 " + POW_NAMES[rr.pow] + " 都会变成 " + fmt(R) + "：最小 " + fmt(small) + "（正好半格，5 进位），最大 " + fmt(large) + "（再多 1 就舍到下一个了）。";
+        var tb = $("rrTargets"); tb.innerHTML = "";
+        [2, 3].forEach(function (p) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = "nearest " + POW_NAMES[p];
+          if (p === rr.pow) b.classList.add("on");
+          b.addEventListener("click", function () { rr.pow = p; rrNewValue(); });
+          tb.appendChild(b);
+        });
+      }
+      function rrNewValue() {
+        var u = Math.pow(10, rr.pow);
+        rr.rounded = randInt(2, 89) * u + (rr.pow === 2 ? pick([0, 100, 500]) : 0);
+        if (rr.pow === 2) rr.rounded = Math.round(rr.rounded / 100) * 100;
+        rrRender();
+      }
+      $("rrNew").addEventListener("click", rrNewValue);
+      rrRender();
+
+      var rp = {};
+      function genRP() {
+        var pow = pick([2, 2, 3]);
+        var u = Math.pow(10, pow);
+        var R = randInt(12, 96) * u / (pow === 2 ? 1 : 1);
+        R = Math.round(R / u) * u;
+        var askSmall = Math.random() < 0.5;
+        var half = u / 2;
+        rp = { ans: askSmall ? R - half : R + half - 1, R: R, pow: pow, askSmall: askSmall, half: half };
+        $("rpQ").textContent = "A number, rounded to the nearest " + POW_NAMES[pow] + ", is " + fmt(R) + ". What is the " + (askSmall ? "smallest" : "largest") + " whole number it could be?";
+        $("rpQZh").textContent = askSmall ? "一个数舍到最近的 " + POW_NAMES[pow] + " 是 " + fmt(R) + "，它最小可能是多少？" : "一个数舍到最近的 " + POW_NAMES[pow] + " 是 " + fmt(R) + "，它最大可能是多少？";
+        $("rpInput").value = "";
+        $("rpFb").textContent = ""; $("rpFb").className = "feedback";
+        $("rpEx").className = "explain"; $("rpEx").innerHTML = "";
+      }
+      $("rpCheck").addEventListener("click", function () {
+        var v = parseAns($("rpInput").value);
+        var ex = $("rpEx");
+        if (isNaN(v)) { $("rpFb").textContent = "先输入一个数吧。"; $("rpFb").className = "feedback bad"; return; }
+        if (v === rp.ans) {
+          $("rpFb").textContent = praise(); $("rpFb").className = "feedback good";
+          ex.innerHTML = "方法：半格是 " + fmt(rp.half) + "。" + (rp.askSmall
+            ? "最小 = " + fmt(rp.R) + " − " + fmt(rp.half) + " = <b>" + fmt(rp.ans) + "</b>（正好半格时决定位是 5，进位，所以算它）。"
+            : "最大 = " + fmt(rp.R) + " + " + fmt(rp.half) + " − 1 = <b>" + fmt(rp.ans) + "</b>（再大 1 就会舍到下一个整" + (rp.pow === 2 ? "百" : "千") + "了）。");
+        } else {
+          $("rpFb").textContent = "不对，再想想口诀：最小减半格，最大加半格再减 1。"; $("rpFb").className = "feedback bad";
+          ex.innerHTML = "半格 = " + fmt(rp.half) + "。" + (rp.askSmall
+            ? "最小 = " + fmt(rp.R) + " − " + fmt(rp.half) + " = <b>" + fmt(rp.R - rp.half) + "</b>。"
+            : "最大 = " + fmt(rp.R) + " + " + fmt(rp.half) + " − 1 = <b>" + fmt(rp.R + rp.half - 1) + "</b>。");
+        }
+        ex.classList.add("show");
+      });
+      $("rpNext").addEventListener("click", genRP);
+      genRP();
+
+      /* ================================================================
+         A3 · WORD PROBLEMS & TRAPS (rounding practice)
+      ================================================================ */
+      function mcPractice(prefix, genFn) {
+        // generic multiple-choice practice card driver
+        var state = {};
+        function render() {
+          state = genFn();
+          $(prefix + "Q").textContent = state.q;
+          $(prefix + "QZh").textContent = state.zh || "";
+          var box = $(prefix + "Choices"); box.innerHTML = "";
+          shuffle(state.choices).forEach(function (c) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "choice"; b.textContent = c.label;
+            b.addEventListener("click", function () {
+              box.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+              var ex = $(prefix + "Ex");
+              if (c.value === state.answer) {
+                b.classList.add("right");
+                $(prefix + "Fb").textContent = praise();
+                $(prefix + "Fb").className = "feedback good";
+              } else {
+                b.classList.add("wrong");
+                box.querySelectorAll("button").forEach(function (x) { if (x.textContent === state.answerLabel) x.classList.add("right"); });
+                $(prefix + "Fb").textContent = "不对，看看下面的方法。";
+                $(prefix + "Fb").className = "feedback bad";
+              }
+              ex.innerHTML = state.explain;
+              ex.classList.add("show");
+            });
+            box.appendChild(b);
+          });
+          $(prefix + "Fb").textContent = ""; $(prefix + "Fb").className = "feedback";
+          $(prefix + "Ex").className = "explain"; $(prefix + "Ex").innerHTML = "";
+        }
+        $(prefix + "Next").addEventListener("click", render);
+        render();
+      }
+      function roundChoices(num, pow) {
+        var u = Math.pow(10, pow);
+        var ans = roundTo(num, pow);
+        var lo = Math.floor(num / u) * u;
+        var vals = [ans, lo, lo + u, ans + u, ans - u];
+        var set = [];
+        vals.forEach(function (v) { if (v >= 0 && set.indexOf(v) < 0) set.push(v); });
+        return set.slice(0, 4).map(function (v) { return { label: fmt(v), value: v }; });
+      }
+      function genWP() {
+        var kind = randInt(0, 3);
+        if (kind === 0) {
+          var n = randInt(20000, 89999), pow = pick([3, 2]);
+          var ans = roundTo(n, pow);
+          return {
+            q: "A stadium crowd is " + fmt(n) + " people. Round this number to the nearest " + POW_NAMES[pow] + ".",
+            zh: "体育场里有 " + fmt(n) + " 名观众，舍到最近的 " + POW_NAMES[pow] + " 是多少？",
+            choices: roundChoices(n, pow), answer: ans, answerLabel: fmt(ans),
+            explain: "看决定位：舍到最近的 " + POW_NAMES[pow] + "，只看它右边一位。答案是 <b>" + fmt(ans) + "</b>。"
+          };
+        }
+        if (kind === 1) {
+          var n2 = randInt(3000, 29999), pow2 = 2;
+          var ans2 = roundTo(n2, pow2);
+          return {
+            q: "A train journey is " + fmt(n2) + " metres long. What is this distance rounded to the nearest 100 metres?",
+            zh: "一段火车路程长 " + fmt(n2) + " 米，舍到最近的 100 米是多少？",
+            choices: roundChoices(n2, pow2), answer: ans2, answerLabel: fmt(ans2),
+            explain: "舍到最近的 100，看<b>十位</b>决定进舍。答案是 <b>" + fmt(ans2) + "</b> 米。"
+          };
+        }
+        if (kind === 2) {
+          var price = pick([8499, 12450, 3675, 19950, 7849, 23599]);
+          var ans3 = roundTo(price, 2);
+          return {
+            q: "A car costs £" + fmt(price) + ". Round the price to the nearest £100.",
+            zh: "一辆车 £" + fmt(price) + "，舍到最近的 £100 是多少？",
+            choices: roundChoices(price, 2).map(function (c) { return { label: "£" + c.label, value: c.value }; }),
+            answer: ans3, answerLabel: "£" + fmt(ans3),
+            explain: "舍到最近的 100，看十位：十位 " + (Math.floor(price / 10) % 10) + (Math.floor(price / 10) % 10 >= 5 ? " ≥ 5，进位" : " ≤ 4，舍去") + "，得到 <b>£" + fmt(ans3) + "</b>。"
+          };
+        }
+        // trap: chain rounding / wrong digit
+        var trapN = pick([4499, 4549, 4495, 5449, 9499]);
+        var ansT = roundTo(trapN, 3);
+        var wrongT = ansT === 4000 || ansT === 5000 || ansT === 9000 ? (trapN < 5000 ? (trapN >= 4500 ? 5000 : 5000) : 10000) : ansT + 1000;
+        if (trapN === 4499 || trapN === 4495) wrongT = 5000;
+        if (trapN === 4549) wrongT = 4000;
+        if (trapN === 5449) wrongT = 6000;
+        if (trapN === 9499) wrongT = 10000;
+        var ch = [{ label: fmt(ansT), value: ansT }, { label: fmt(wrongT), value: wrongT }];
+        [ansT - 1000, ansT + 1000].forEach(function (v) { if (ch.length < 4 && v >= 0 && v !== wrongT && v !== ansT) ch.push({ label: fmt(v), value: v }); });
+        return {
+          q: "Round " + fmt(trapN) + " to the nearest 1,000. Watch out — this is a trap!",
+          zh: "把 " + fmt(trapN) + " 舍到最近的 1,000。小心，这是陷阱题！",
+          choices: ch, answer: ansT, answerLabel: fmt(ansT),
+          explain: "只看<b>百位</b>这一个决定位：百位是 " + (Math.floor(trapN / 100) % 10) + "，" + (Math.floor(trapN / 100) % 10 >= 5 ? "≥5 进位" : "≤4 舍去") + " → <b>" + fmt(ansT) + "</b>。不要先舍到 100 再舍到 1,000（舍两次会爬过头），也不要看十位、个位。"
+        };
+      }
+      mcPractice("wp", genWP);
+
+      /* ================================================================
+         B · NUMBER LINE BUILDER (shared)
+      ================================================================ */
+      function buildLine(trackId, ticksId, min, max, step) {
+        var track = $(trackId);
+        var zeroPct = ((0 - min) / (max - min)) * 100;
+        track.style.background = "linear-gradient(90deg, var(--neg) 0%, var(--neg) " + zeroPct + "%, var(--pos) " + zeroPct + "%, var(--pos) 100%)";
+        var ticks = $(ticksId); ticks.innerHTML = "";
+        for (var v = min; v <= max; v += step) {
+          var t = document.createElement("div");
+          t.className = "nl-tick";
+          t.style.left = ((v - min) / (max - min)) * 100 + "%";
+          t.textContent = fmtNeg(v);
+          ticks.appendChild(t);
+        }
+      }
+      function linePos(min, max, v) { return ((v - min) / (max - min)) * 100 + "%"; }
+
+      /* ---------- B1 · ordering mixed numbers ---------- */
+      var noSets = [
+        [-12, 3, -7, 0, -1], [-5, -9, 2, -2, 6], [-15, -3, -20, 5, 0],
+        [-8, -11, 4, -4, 9], [-1, -6, -13, 7, 2], [-18, -9, -2, 1, -14]
+      ];
+      var noState = { set: [], picked: [] };
+      function noRender() {
+        var pool = $("noPool"); pool.innerHTML = "";
+        noState.set.forEach(function (v) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "order-chip";
+          b.innerHTML = fmtNeg(v) + '<span class="rank"></span>';
+          b.setAttribute("data-v", v);
+          b.addEventListener("click", function () {
+            var idx = noState.picked.indexOf(v);
+            if (idx >= 0) { noState.picked.splice(idx, 1); } else { noState.picked.push(v); }
+            noPaint();
+          });
+          pool.appendChild(b);
+        });
+        noPaint();
+      }
+      function noPaint() {
+        $("noPool").querySelectorAll(".order-chip").forEach(function (b) {
+          var v = +b.getAttribute("data-v");
+          var idx = noState.picked.indexOf(v);
+          b.classList.toggle("picked", idx >= 0);
+          b.classList.remove("right"); b.classList.remove("wrong");
+          if (idx >= 0) b.querySelector(".rank").textContent = idx + 1;
+        });
+      }
+      function noNewSet() {
+        noState.set = shuffle(pick(noSets).slice());
+        noState.picked = [];
+        noRender();
+        $("noFb").textContent = ""; $("noFb").className = "feedback";
+        $("noEx").className = "explain"; $("noEx").innerHTML = "";
+      }
+      $("noReset").addEventListener("click", function () { noState.picked = []; noPaint(); });
+      $("noNew").addEventListener("click", noNewSet);
+      $("noCheck").addEventListener("click", function () {
+        if (noState.picked.length !== noState.set.length) {
+          $("noFb").textContent = "还没点完哦，把 5 个数都点上。"; $("noFb").className = "feedback bad"; return;
+        }
+        var sorted = noState.set.slice().sort(function (a, b) { return a - b; });
+        var ok = noState.picked.every(function (v, i) { return v === sorted[i]; });
+        $("noPool").querySelectorAll(".order-chip").forEach(function (b) {
+          b.classList.add(ok ? "right" : "wrong");
+        });
+        var ex = $("noEx");
+        if (ok) {
+          $("noFb").textContent = praise() + " 顺序完全正确！"; $("noFb").className = "feedback good";
+        } else {
+          $("noFb").textContent = "顺序不对，看看正确顺序。"; $("noFb").className = "feedback bad";
+        }
+        ex.innerHTML = "从小到大：<b>" + sorted.map(fmtNeg).join(", ") + "</b>。方法：负数里离 0 越远越小（" + fmtNeg(sorted[0]) + " 最左、最冷），0 在中间，正数越大越靠右。";
+        ex.classList.add("show");
+      });
+      noNewSet();
+
+      /* ---------- B2 · difference lab ---------- */
+      var diffState = { a: -11, b: -3, timer: null };
+      function diffFillSelects() {
+        ["diffA", "diffB"].forEach(function (id) {
+          var sel = $(id); sel.innerHTML = "";
+          for (var v = -20; v <= 20; v++) {
+            var o = document.createElement("option");
+            o.value = v; o.textContent = fmtNeg(v) + "°C";
+            sel.appendChild(o);
+          }
+        });
+        $("diffA").value = diffState.a; $("diffB").value = diffState.b;
+      }
+      function diffPaint() {
+        var lo = Math.min(diffState.a, diffState.b);
+        $("diffMarker").style.left = linePos(-20, 20, lo);
+        $("diffPinVal").textContent = fmtNeg(lo);
+        $("diffPos").textContent = fmtNeg(diffState.a) + "°C 和 " + fmtNeg(diffState.b) + "°C";
+        $("diffFb").textContent = ""; $("diffFb").className = "feedback";
+        $("diffEx").className = "explain"; $("diffEx").innerHTML = "";
+      }
+      function diffChanged() {
+        if (diffState.timer) { clearInterval(diffState.timer); diffState.timer = null; }
+        diffState.a = +$("diffA").value; diffState.b = +$("diffB").value;
+        diffPaint();
+      }
+      $("diffA").addEventListener("change", diffChanged);
+      $("diffB").addEventListener("change", diffChanged);
+      $("diffReset").addEventListener("click", function () {
+        diffState.a = -11; diffState.b = -3;
+        $("diffA").value = -11; $("diffB").value = -3; diffChanged();
+      });
+      $("diffCount").addEventListener("click", function () {
+        if (diffState.timer) clearInterval(diffState.timer);
+        var lo = Math.min(diffState.a, diffState.b), hi = Math.max(diffState.a, diffState.b);
+        var cur = lo, steps = 0, total = hi - lo;
+        $("diffMarker").style.left = linePos(-20, 20, cur);
+        $("diffPinVal").textContent = fmtNeg(cur);
+        $("diffPos").textContent = "走了 0 格";
+        diffState.timer = setInterval(function () {
+          if (cur >= hi) {
+            clearInterval(diffState.timer); diffState.timer = null;
+            $("diffPos").textContent = "一共 " + total + " 格！";
+            $("diffFb").textContent = fmtNeg(diffState.a) + "°C 和 " + fmtNeg(diffState.b) + "°C 相差 " + total + " 度。";
+            $("diffFb").className = "feedback good";
+            var ex = $("diffEx");
+            ex.innerHTML = "方法：温差 = 大的 − 小的 = " + fmtNeg(hi) + " − (" + fmtNeg(lo) + ")，在数轴上就是从 " + fmtNeg(lo) + " 走到 " + fmtNeg(hi) + " 的格数 = <b>" + total + "</b>。两个都是负数时也一样数格子，不用管正负号。";
+            ex.classList.add("show");
+            return;
+          }
+          cur++; steps++;
+          $("diffMarker").style.left = linePos(-20, 20, cur);
+          $("diffPinVal").textContent = fmtNeg(cur);
+          $("diffPos").textContent = "走了 " + steps + " 格";
+        }, 260);
+      });
+      buildLine("diffTrack", "diffTicks", -20, 20, 4);
+      diffFillSelects(); diffPaint();
+
+      /* ---------- B3 · number-line calculations ---------- */
+      var CALCS = [
+        { s: -3, op: "+", n: 5 }, { s: 2, op: "−", n: 7 }, { s: -4, op: "−", n: 3 },
+        { s: 6, op: "−", n: 9 }, { s: -2, op: "+", n: 8 }, { s: -6, op: "+", n: 4 },
+        { s: 5, op: "−", n: 8 }, { s: -7, op: "+", n: 7 }
+      ];
+      var calcState = { cur: CALCS[0], timer: null };
+      function calcLabel(c) { return fmtNeg(c.s) + " " + c.op + " " + c.n; }
+      function calcResult(c) { return c.op === "+" ? c.s + c.n : c.s - c.n; }
+      function calcPlay() {
+        if (calcState.timer) clearInterval(calcState.timer);
+        var c = calcState.cur, res = calcResult(c);
+        var cur = c.s, dir = res > c.s ? 1 : -1, steps = Math.abs(res - c.s), done = 0;
+        $("calcMarker").style.left = linePos(-10, 10, cur);
+        $("calcPinVal").textContent = fmtNeg(cur);
+        $("calcPos").textContent = calcLabel(c) + " ：从 " + fmtNeg(c.s) + " 出发";
+        calcState.timer = setInterval(function () {
+          if (done >= steps) {
+            clearInterval(calcState.timer); calcState.timer = null;
+            $("calcPos").textContent = calcLabel(c) + " = " + fmtNeg(res);
+            return;
+          }
+          cur += dir; done++;
+          $("calcMarker").style.left = linePos(-10, 10, cur);
+          $("calcPinVal").textContent = fmtNeg(cur);
+        }, 300);
+      }
+      (function () {
+        var box = $("calcChips");
+        CALCS.forEach(function (c, i) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = calcLabel(c);
+          if (i === 0) b.classList.add("on");
+          b.addEventListener("click", function () {
+            box.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+            b.classList.add("on");
+            calcState.cur = c; calcPlay();
+          });
+          box.appendChild(b);
+        });
+      })();
+      $("calcPlay").addEventListener("click", calcPlay);
+      buildLine("calcTrack", "calcTicks", -10, 10, 2);
+      calcPlay();
+
+      /* ---------- B4 · negatives practice ---------- */
+      var npState = {};
+      function genNP() {
+        var kind = randInt(0, 2);
+        var body = $("npBody"); body.innerHTML = "";
+        $("npFb").textContent = ""; $("npFb").className = "feedback";
+        $("npEx").className = "explain"; $("npEx").innerHTML = "";
+        if (kind === 0) {
+          // multi-step temperature, input answer
+          var start = randInt(-9, 2), fall = randInt(2, 7), rise = randInt(3, 11);
+          var mid = start - fall, ans = mid + rise;
+          npState = { type: "input", ans: ans };
+          $("npQ").textContent = "At dawn the temperature is " + fmtNeg(start) + "°C. It falls by " + fall + " degrees, then rises by " + rise + " degrees. What is the temperature now?";
+          $("npQZh").textContent = "清晨 " + fmtNeg(start) + "°C，先降温 " + fall + " 度，再升温 " + rise + " 度，现在是多少度？";
+          body.innerHTML = '<div class="ans-row"><input class="ans-input" id="npInput" inputmode="text" autocomplete="off" aria-label="你的答案" /><span style="font-weight:800">°C</span><button class="btn teal" id="npCheck" type="button">检查 Check</button></div>';
+          npState.explain = "一步一步走：" + fmtNeg(start) + " 先降 " + fall + " → " + fmtNeg(mid) + "，再升 " + rise + " → <b>" + fmtNeg(ans) + "°C</b>。降温往左走、升温往右走，路过 0 不用停。";
+          $("npCheck").addEventListener("click", function () { npCheckInput(); });
+        } else if (kind === 1) {
+          // calculation across zero, input answer
+          var c = pick(CALCS);
+          npState = { type: "input", ans: calcResult(c) };
+          $("npQ").textContent = "Work out: " + calcLabel(c);
+          $("npQZh").textContent = "在数轴上想：" + (c.op === "+" ? "从 " + fmtNeg(c.s) + " 往右走 " + c.n + " 格" : "从 " + fmtNeg(c.s) + " 往左走 " + c.n + " 格") + "，落在哪里？";
+          body.innerHTML = '<div class="ans-row"><input class="ans-input" id="npInput" inputmode="text" autocomplete="off" aria-label="你的答案" /><button class="btn teal" id="npCheck" type="button">检查 Check</button></div>';
+          var toZero = Math.abs(c.s);
+          npState.explain = "先走到 0：" + fmtNeg(c.s) + " 到 0 要走 " + toZero + " 格；一共要走 " + c.n + " 格，还剩 " + Math.abs(c.n - toZero) + " 格继续走，落在 <b>" + fmtNeg(calcResult(c)) + "</b>。";
+          $("npCheck").addEventListener("click", function () { npCheckInput(); });
+        } else {
+          // missing number on a number line, choices
+          var min = pick([-8, -10, -6]), step = 2;
+          var max = min + 10 * step;
+          var vals = [];
+          for (var v = min; v <= max; v += step) vals.push(v);
+          var missIdx = randInt(2, 8);
+          var missing = vals[missIdx];
+          npState = { type: "mc", ans: missing };
+          $("npQ").textContent = "What number is the arrow pointing to on this number line?";
+          $("npQZh").textContent = "数轴上问号处是几？注意：这条数轴不是从 0 开始的，每格是 2。";
+          var wrap = document.createElement("div");
+          wrap.className = "nl-wrap";
+          wrap.innerHTML = '<div class="nl-track" id="npTrack"></div><div class="nl-marker" id="npMarker"><div class="pin"><span>?</span></div></div><div class="nl-ticks" id="npTicks"></div>';
+          body.appendChild(wrap);
+          var track = wrap.querySelector("#npTrack");
+          var zeroPct = ((0 - min) / (max - min)) * 100;
+          track.style.background = "linear-gradient(90deg, var(--neg) 0%, var(--neg) " + zeroPct + "%, var(--pos) " + zeroPct + "%, var(--pos) 100%)";
+          var ticks = wrap.querySelector("#npTicks");
+          vals.forEach(function (val, i) {
+            var t = document.createElement("div");
+            t.className = "nl-tick" + (i === missIdx ? " blank" : "");
+            t.style.left = ((val - min) / (max - min)) * 100 + "%";
+            t.textContent = i === missIdx ? "?" : fmtNeg(val);
+            ticks.appendChild(t);
+          });
+          wrap.querySelector("#npMarker").style.left = ((missing - min) / (max - min)) * 100 + "%";
+          var chBox = document.createElement("div");
+          chBox.className = "choices";
+          body.appendChild(chBox);
+          var opts = shuffle([missing, missing - 2, missing + 2, missing + 4]);
+          npState.explain = "数轴从 " + fmtNeg(min) + " 开始，每格 +2：一个一个数过去 " + vals.map(function (x) { return fmtNeg(x); }).join(", ") + "，问号处是 <b>" + fmtNeg(missing) + "</b>。";
+          opts.forEach(function (o) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "choice"; b.textContent = fmtNeg(o);
+            b.addEventListener("click", function () {
+              chBox.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+              var ex = $("npEx");
+              if (o === missing) {
+                b.classList.add("right");
+                $("npFb").textContent = praise(); $("npFb").className = "feedback good";
+              } else {
+                b.classList.add("wrong");
+                chBox.querySelectorAll("button").forEach(function (x) { if (x.textContent === fmtNeg(missing)) x.classList.add("right"); });
+                $("npFb").textContent = "不对，沿着数轴一格一格数一数。"; $("npFb").className = "feedback bad";
+              }
+              ex.innerHTML = npState.explain; ex.classList.add("show");
+            });
+            chBox.appendChild(b);
+          });
+        }
+      }
+      function npCheckInput() {
+        var v = parseAns($("npInput").value);
+        var ex = $("npEx");
+        if (isNaN(v)) { $("npFb").textContent = "先输入一个数吧（负数记得写负号）。"; $("npFb").className = "feedback bad"; return; }
+        if (v === npState.ans) {
+          $("npFb").textContent = praise(); $("npFb").className = "feedback good";
+        } else {
+          $("npFb").textContent = "不对，看看下面的方法。"; $("npFb").className = "feedback bad";
+        }
+        ex.innerHTML = npState.explain; ex.classList.add("show");
+      }
+      $("npNext").addEventListener("click", genNP);
+      genNP();
+
+      /* ================================================================
+         C · ROMAN NUMERALS
+      ================================================================ */
+      var ROMAN_TABLE = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+      function toRoman(n) {
+        var s = "";
+        ROMAN_TABLE.forEach(function (p) { while (n >= p[0]) { s += p[1]; n -= p[0]; } });
+        return s;
+      }
+      function fromRoman(s) {
+        var vals = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+        var total = 0;
+        for (var i = 0; i < s.length; i++) {
+          var cur = vals[s[i]], nxt = i + 1 < s.length ? vals[s[i + 1]] : 0;
+          total += cur < nxt ? -cur : cur;
+        }
+        return total;
+      }
+      function romanBreakdown(s) {
+        var parts = [], i = 0;
+        while (i < s.length) {
+          var matched = null;
+          for (var k = 0; k < ROMAN_TABLE.length; k++) {
+            var sym = ROMAN_TABLE[k][1];
+            if (s.substr(i, sym.length) === sym) { matched = ROMAN_TABLE[k]; break; }
+          }
+          if (!matched) return null;
+          parts.push({ sym: matched[1], val: matched[0] });
+          i += matched[1].length;
+        }
+        return parts;
+      }
+      function romanPartsOf(n) {
+        var parts = [];
+        [1000, 100, 10, 1].forEach(function (pl) {
+          var d = Math.floor(n / pl) % 10;
+          if (d > 0) parts.push({ num: d * pl, rom: toRoman(d * pl) });
+        });
+        return parts;
+      }
+
+      /* ---------- C2 · builder ---------- */
+      var rbNum = 472;
+      function rbRenderChips() {
+        var box = $("rbChips"); box.innerHTML = "";
+        [58, 199, 472, 944, 2026].forEach(function (n) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = fmt(n);
+          if (n === rbNum) b.classList.add("on");
+          b.addEventListener("click", function () { rbNum = n; rbShow(); });
+          box.appendChild(b);
+        });
+      }
+      function rbShow() {
+        rbRenderChips();
+        $("rbNum").textContent = fmt(rbNum);
+        $("rbDecomp").className = "decomp"; $("rbDecomp").innerHTML = "";
+      }
+      $("rbRandom").addEventListener("click", function () { rbNum = randInt(4, 999); rbShow(); rbBuild(); });
+      function rbBuild() {
+        var parts = romanPartsOf(rbNum);
+        var box = $("rbDecomp"); box.innerHTML = "";
+        var nums = parts.map(function (p) { return fmt(p.num); }).join(" + ");
+        var roms = parts.map(function (p) { return p.rom; }).join(" + ");
+        var h = '<div class="decomp-row"><span>' + fmt(rbNum) + '</span><span class="arr">→</span><span>' + nums + '</span></div>';
+        parts.forEach(function (p) {
+          h += '<div class="decomp-row"><span>' + fmt(p.num) + '</span><span class="arr">→</span><span class="rom">' + p.rom + '</span></div>';
+        });
+        h += '<div class="decomp-total">' + roms + ' = <span class="rom">' + toRoman(rbNum) + '</span></div>';
+        box.innerHTML = h;
+        box.classList.add("show");
+      }
+      $("rbBuild").addEventListener("click", rbBuild);
+      rbShow();
+
+      /* ---------- C3 · decoder ---------- */
+      function rdDecode() {
+        var s = ($("rdInput").value || "").toUpperCase().replace(/\s/g, "");
+        $("rdInput").value = s;
+        var box = $("rdDecomp"); box.innerHTML = "";
+        $("rdFb").textContent = ""; $("rdFb").className = "feedback";
+        if (!s || /[^IVXLCDM]/.test(s)) {
+          $("rdFb").textContent = "只能用 I、V、X、L、C、D、M 这七个字母哦。";
+          $("rdFb").className = "feedback bad"; return;
+        }
+        var parts = romanBreakdown(s);
+        var total = fromRoman(s);
+        if (!parts || toRoman(total) !== s || total > 3999) {
+          $("rdFb").textContent = "这个写法不符合规则（检查一下：减法只有 IV、IX、XL、XC、CD、CM 六对，同一个符号最多连写 3 次）。";
+          $("rdFb").className = "feedback bad";
+          box.classList.remove("show"); return;
+        }
+        var h = "";
+        parts.forEach(function (p) {
+          h += '<div class="decomp-row"><span class="rom">' + p.sym + '</span><span class="arr">→</span><span>' + fmt(p.val) + '</span></div>';
+        });
+        h += '<div class="decomp-total"><span class="rom">' + s + '</span> = ' + parts.map(function (p) { return fmt(p.val); }).join(" + ") + ' = <span class="rom">' + fmt(total) + '</span></div>';
+        box.innerHTML = h;
+        box.classList.add("show");
+      }
+      $("rdGo").addEventListener("click", rdDecode);
+      $("rdInput").addEventListener("keydown", function (e) { if (e.key === "Enter") rdDecode(); });
+      (function () {
+        var box = $("rdChips");
+        ["LVIII", "CXCIX", "CDLXXII", "CMXLIV", "MMXXVI"].forEach(function (s) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = s;
+          b.addEventListener("click", function () { $("rdInput").value = s; rdDecode(); });
+          box.appendChild(b);
+        });
+      })();
+      rdDecode();
+
+      /* ---------- C4 · roman practice ---------- */
+      function genRO() {
+        var kind = randInt(0, 3);
+        if (kind === 0) {
+          var n = pick([47, 58, 94, 126, 199, 245, 390, 472, 648, 766, 944, 2026]);
+          var ans = toRoman(n);
+          var wrong = shuffle([toRoman(n + 1), toRoman(n - 1), toRoman(n + 10), toRoman(Math.max(1, n - 10))].filter(function (x) { return x !== ans; })).slice(0, 3);
+          return {
+            q: "What is " + fmt(n) + " in Roman numerals?",
+            zh: "把 " + fmt(n) + " 写成罗马数字。",
+            choices: [ans].concat(wrong).map(function (x) { return { label: x, value: x }; }),
+            answer: ans, answerLabel: ans,
+            explain: "按数位拆：" + fmt(n) + " = " + romanPartsOf(n).map(function (p) { return fmt(p.num); }).join(" + ") + " → " + romanPartsOf(n).map(function (p) { return p.rom; }).join(" + ") + " = <b>" + ans + "</b>。"
+          };
+        }
+        if (kind === 1) {
+          var r = pick(["LVIII", "CXCIX", "CDLXXII", "CMXLIV", "XLIX", "DCCXL", "MMXXVI", "XCIV"]);
+          var v = fromRoman(r);
+          var wrong2 = shuffle([v + 1, v - 1, v + 10, v + 100].filter(function (x) { return x !== v && x > 0; })).slice(0, 3);
+          return {
+            q: "What number is " + r + "?",
+            zh: "罗马数字 " + r + " 是多少？一段一段读。",
+            choices: [v].concat(wrong2).map(function (x) { return { label: fmt(x), value: x }; }),
+            answer: v, answerLabel: fmt(v),
+            explain: r + " = " + romanBreakdown(r).map(function (p) { return p.sym + " (" + fmt(p.val) + ")"; }).join(" + ") + " = <b>" + fmt(v) + "</b>。小符号在大符号前面要相减，如 CM = 900。"
+          };
+        }
+        if (kind === 2) {
+          var year = pick([2024, 2025, 2026, 1999, 2012, 1066]);
+          var ansY = toRoman(year);
+          var wrongY = shuffle([toRoman(year + 1), toRoman(year - 1), toRoman(year + 10)]).slice(0, 3);
+          return {
+            q: "The year " + fmt(year) + " is written in Roman numerals on a building. What does it look like?",
+            zh: "年份 " + fmt(year) + " 用罗马数字怎么写？",
+            choices: [ansY].concat(wrongY).map(function (x) { return { label: x, value: x }; }),
+            answer: ansY, answerLabel: ansY,
+            explain: fmt(year) + " = " + romanPartsOf(year).map(function (p) { return fmt(p.num); }).join(" + ") + " → <b>" + ansY + "</b>。"
+          };
+        }
+        // spot the wrong one
+        var pairs = [
+          { n: 49, good: "XLIX", bad: "IL" }, { n: 4, good: "IV", bad: "IIII" },
+          { n: 40, good: "XL", bad: "XXXX" }, { n: 90, good: "XC", bad: "LXXXX" },
+          { n: 400, good: "CD", bad: "CCCC" }, { n: 9, good: "IX", bad: "VIIII" },
+          { n: 944, good: "CMXLIV", bad: "DCCCCXXXXIIII" }
+        ];
+        var pr = pick(pairs);
+        var others = shuffle(pairs.filter(function (x) { return x !== pr; })).slice(0, 2);
+        var opts = [{ label: pr.n + " = " + pr.bad, value: "bad" }];
+        others.forEach(function (o) { opts.push({ label: o.n + " = " + o.good, value: "ok" }); });
+        opts.push({ label: pr.n + " = " + pr.good, value: "ok" });
+        return {
+          q: "One of these is WRONG. Which one?",
+          zh: "下面有一条是错的，是哪一条？",
+          choices: opts, answer: "bad", answerLabel: pr.n + " = " + pr.bad,
+          explain: pr.n + " 应该写 <b>" + pr.good + "</b>，不能写 " + pr.bad + "：同一个符号最多连写 3 次，而且减法只有 IV、IX、XL、XC、CD、CM 六对（没有 IL 这种写法）。"
+        };
+      }
+      mcPractice("ro", genRO);
+
+      /* ================================================================
+         D · FACTORS, MULTIPLES, PRIMES
+      ================================================================ */
+      function factorPairs(n) {
+        var pairs = [];
+        for (var i = 1; i * i <= n; i++) { if (n % i === 0) pairs.push([i, n / i]); }
+        return pairs;
+      }
+      function allFactors(n) {
+        var f = [];
+        factorPairs(n).forEach(function (p) { f.push(p[0]); if (p[1] !== p[0]) f.push(p[1]); });
+        return f.sort(function (a, b) { return a - b; });
+      }
+      function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+
+      /* ---------- D1 · factor finder ---------- */
+      var ff = { n: 36, shown: 0 };
+      function ffRenderChips() {
+        var box = $("ffChips"); box.innerHTML = "";
+        [12, 18, 24, 36, 42, 48, 60].forEach(function (n) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = n;
+          if (n === ff.n) b.classList.add("on");
+          b.addEventListener("click", function () { ff.n = n; ff.shown = 0; ffRender(); });
+          box.appendChild(b);
+        });
+      }
+      function ffRender() {
+        ffRenderChips();
+        $("ffNum").textContent = ff.n;
+        var pairs = factorPairs(ff.n);
+        var box = $("ffPairs"); box.innerHTML = "";
+        for (var i = 0; i < ff.shown && i < pairs.length; i++) {
+          var chip = document.createElement("span");
+          chip.className = "pair-chip";
+          chip.innerHTML = pairs[i][0] + " × " + pairs[i][1] + ' <span class="eq">= ' + ff.n + "</span>";
+          box.appendChild(chip);
+        }
+        if (ff.shown > 0) {
+          var last = pairs[Math.min(ff.shown, pairs.length) - 1];
+          $("ffDots").classList.add("show");
+          $("ffDotNote").textContent = "最新一对：" + last[0] + " 行 × " + last[1] + " 列，正好摆满 " + ff.n + " 个点。";
+          var grid = $("ffDotGrid");
+          grid.style.gridTemplateColumns = "repeat(" + last[1] + ", 14px)";
+          grid.innerHTML = "";
+          for (var d = 0; d < ff.n; d++) grid.appendChild(document.createElement("i"));
+        } else {
+          $("ffDots").classList.remove("show");
+        }
+        var list = $("ffList");
+        if (ff.shown >= pairs.length) {
+          var facs = allFactors(ff.n);
+          list.innerHTML = ff.n + " 的全部因数：<br />" + facs.join(", ") + "<br /><span style=\"font-size:16px\">一共 " + facs.length + " 个" + (pairs[pairs.length - 1][0] === pairs[pairs.length - 1][1] ? "（最后一对是 " + pairs[pairs.length - 1][0] + " × " + pairs[pairs.length - 1][0] + "，只算一个因数，所以总数是奇数个）" : "") + "</span>";
+          list.classList.add("show");
+          $("ffNext").disabled = true;
+          $("ffFb").textContent = "找全了！🎉"; $("ffFb").className = "feedback good";
+        } else {
+          list.classList.remove("show");
+          $("ffNext").disabled = false;
+          $("ffFb").textContent = ff.shown === 0 ? "点「找下一对」开始。" : "已找到 " + ff.shown + " 对，继续！";
+          $("ffFb").className = "feedback";
+        }
+      }
+      $("ffNext").addEventListener("click", function () { ff.shown++; ffRender(); });
+      $("ffRestart").addEventListener("click", function () { ff.shown = 0; ffRender(); });
+      ffRender();
+
+      /* ---------- D2 · LCM / HCF listing demos ---------- */
+      function multList(a, upto) {
+        var out = [];
+        for (var m = a; m <= upto; m += a) out.push(m);
+        return out;
+      }
+      function renderLCM(a, b) {
+        var l = a * b / gcd(a, b);
+        var upto = Math.max(l * 2, a * 6, b * 6);
+        var ma = multList(a, upto), mb = multList(b, upto);
+        function row(label, arr) {
+          var h = '<div class="mult-row"><span class="mlab">' + label + "</span>";
+          arr.forEach(function (v) {
+            var cls = "mult-num";
+            if (v % a === 0 && v % b === 0) cls += v === l ? " the-one" : " common";
+            h += '<span class="' + cls + '">' + v + "</span>";
+          });
+          return h + "</div>";
+        }
+        $("lcmBody").innerHTML = row(a + " 的倍数：", ma) + row(b + " 的倍数：", mb) +
+          '<div class="rule-box">公倍数（黄色）里最小的（绿色）是 <span class="chant">LCM = ' + l + "</span>： " + a + " 和 " + b + " 的最小公倍数是 " + l + "。</div>";
+      }
+      function renderHCF(a, b) {
+        var fa = allFactors(a), fb = allFactors(b), h = gcd(a, b);
+        function row(label, arr, other) {
+          var hh = '<div class="mult-row"><span class="mlab">' + label + "</span>";
+          arr.forEach(function (v) {
+            var cls = "mult-num";
+            if (other.indexOf(v) >= 0) cls += v === h ? " the-one" : " common";
+            hh += '<span class="' + cls + '">' + v + "</span>";
+          });
+          return hh + "</div>";
+        }
+        $("hcfBody").innerHTML = row(a + " 的因数：", fa, fb) + row(b + " 的因数：", fb, fa) +
+          '<div class="rule-box">公因数（黄色）里最大的（绿色）是 <span class="chant">HCF = ' + h + "</span>： " + a + " 和 " + b + " 的最大公因数是 " + h + "。</div>";
+      }
+      (function () {
+        var pairs = [[4, 6], [3, 8], [5, 6], [6, 8]];
+        var box = $("lcmChips");
+        pairs.forEach(function (p, i) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = p[0] + " 和 " + p[1];
+          if (i === 0) b.classList.add("on");
+          b.addEventListener("click", function () {
+            box.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+            b.classList.add("on"); renderLCM(p[0], p[1]);
+          });
+          box.appendChild(b);
+        });
+        var hpairs = [[12, 18], [16, 24], [15, 20], [8, 20]];
+        var hbox = $("hcfChips");
+        hpairs.forEach(function (p, i) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = p[0] + " 和 " + p[1];
+          if (i === 0) b.classList.add("on");
+          b.addEventListener("click", function () {
+            hbox.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+            b.classList.add("on"); renderHCF(p[0], p[1]);
+          });
+          hbox.appendChild(b);
+        });
+      })();
+      renderLCM(4, 6); renderHCF(12, 18);
+
+      /* ---------- D3 · word problems (LCM / HCF contexts) ---------- */
+      var fwState = {};
+      function genFW() {
+        var kind = randInt(0, 2);
+        if (kind === 0) {
+          var a = pick([4, 3, 5]), b = pick([6, 8, 10]);
+          if (a === b) b = 6;
+          var l = a * b / gcd(a, b);
+          fwState = { ans: l, unit: "分钟 minutes" };
+          $("fwQ").textContent = "Bus A leaves every " + a + " minutes and Bus B leaves every " + b + " minutes. They both leave together at 9:00. In how many minutes will they next leave together?";
+          $("fwQZh").textContent = "A 车每 " + a + " 分钟一班，B 车每 " + b + " 分钟一班，9:00 同时发车。多少分钟后再次同时发车？（找 LCM）";
+          fwState.explain = "找 " + a + " 和 " + b + " 的最小公倍数：" + a + " 的倍数 " + multList(a, l).join(", ") + "；" + b + " 的倍数 " + multList(b, l).join(", ") + "。第一个相同的是 <b>" + l + "</b>，所以 " + l + " 分钟后再次同时发车。";
+        } else if (kind === 1) {
+          var p = pick([[12, 18], [16, 24], [15, 20], [20, 30]]);
+          var h = gcd(p[0], p[1]);
+          fwState = { ans: h, unit: "组 packs" };
+          $("fwQ").textContent = "There are " + p[0] + " pencils and " + p[1] + " stickers. They are packed into identical packs with nothing left over. What is the greatest number of packs that can be made?";
+          $("fwQZh").textContent = p[0] + " 支铅笔和 " + p[1] + " 张贴纸，要装成完全一样的礼包、不能有剩余。最多能装多少组？（找 HCF）";
+          fwState.explain = "组数必须同时整除 " + p[0] + " 和 " + p[1] + "，要最多的组数就找最大公因数：HCF(" + p[0] + ", " + p[1] + ") = <b>" + h + "</b> 组。每组 " + (p[0] / h) + " 支铅笔和 " + (p[1] / h) + " 张贴纸。";
+        } else {
+          var n = pick([36, 48, 24, 30]);
+          fwState = { ans: allFactors(n).length, unit: "个 factors" };
+          $("fwQ").textContent = "How many factors does " + n + " have?";
+          $("fwQZh").textContent = n + " 一共有多少个因数？成对找，别漏掉。";
+          fwState.explain = n + " 的因数对：" + factorPairs(n).map(function (pr) { return pr[0] + "×" + pr[1]; }).join("、") + "。全部因数是 " + allFactors(n).join(", ") + "，一共 <b>" + allFactors(n).length + "</b> 个。";
+        }
+        $("fwUnit").textContent = fwState.unit;
+        $("fwInput").value = "";
+        $("fwFb").textContent = ""; $("fwFb").className = "feedback";
+        $("fwEx").className = "explain"; $("fwEx").innerHTML = "";
+      }
+      $("fwCheck").addEventListener("click", function () {
+        var v = parseAns($("fwInput").value);
+        var ex = $("fwEx");
+        if (isNaN(v)) { $("fwFb").textContent = "先输入一个数吧。"; $("fwFb").className = "feedback bad"; return; }
+        if (v === fwState.ans) { $("fwFb").textContent = praise(); $("fwFb").className = "feedback good"; }
+        else { $("fwFb").textContent = "不对，看看下面的方法。"; $("fwFb").className = "feedback bad"; }
+        ex.innerHTML = fwState.explain; ex.classList.add("show");
+      });
+      $("fwNext").addEventListener("click", genFW);
+      genFW();
+
+      /* ---------- D4 · sieve game ---------- */
+      var PRIMES50 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+      var sievePicked = {};
+      function sieveRender() {
+        var grid = $("sieveGrid"); grid.innerHTML = "";
+        for (var n = 1; n <= 50; n++) {
+          (function (n) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "sieve-btn"; b.textContent = n;
+            b.setAttribute("data-n", n);
+            b.addEventListener("click", function () {
+              sievePicked[n] = !sievePicked[n];
+              b.classList.toggle("picked", !!sievePicked[n]);
+            });
+            grid.appendChild(b);
+          })(n);
+        }
+        $("sieveFb").textContent = ""; $("sieveFb").className = "feedback";
+        $("sieveEx").className = "explain"; $("sieveEx").innerHTML = "";
+      }
+      $("sieveCheck").addEventListener("click", function () {
+        var right = 0, wrongPick = 0, missed = 0;
+        $("sieveGrid").querySelectorAll(".sieve-btn").forEach(function (b) {
+          var n = +b.getAttribute("data-n");
+          var isP = PRIMES50.indexOf(n) >= 0, picked = !!sievePicked[n];
+          b.disabled = true;
+          b.classList.remove("picked");
+          if (isP && picked) { b.classList.add("right"); right++; }
+          else if (!isP && picked) { b.classList.add("wrong"); wrongPick++; }
+          else if (isP && !picked) { b.classList.add("missed"); missed++; }
+        });
+        var ex = $("sieveEx");
+        if (wrongPick === 0 && missed === 0) {
+          $("sieveFb").textContent = "全对！50 以内的 15 个质数一个不差！🎉";
+          $("sieveFb").className = "feedback good";
+        } else {
+          $("sieveFb").textContent = "点对了 " + right + " 个质数" + (wrongPick ? "，有 " + wrongPick + " 个不是质数（红色）" : "") + (missed ? "，漏了 " + missed + " 个（黄色虚线）" : "") + "。";
+          $("sieveFb").className = "feedback bad";
+        }
+        ex.innerHTML = "1–50 的质数共 15 个：<b>" + PRIMES50.join(", ") + "</b>。记住：<b>1 不是质数</b>（只有 1 个因数）；<b>2 是唯一的偶质数</b>；51 这种看着像质数的其实是 3 × 17 —— 不过它不在这张表里，下次小心结尾是 1 的数。";
+        ex.classList.add("show");
+      });
+      $("sieveReset").addEventListener("click", function () { sievePicked = {}; sieveRender(); });
+      sieveRender();
+
+      /* ---------- D5 · factors/primes practice ---------- */
+      function genFP() {
+        var kind = randInt(0, 3);
+        if (kind === 0) {
+          var n = pick([24, 36, 48, 30, 42, 60]);
+          var facs = allFactors(n);
+          var ans = pick(facs.slice(1, facs.length - 1).concat([facs[facs.length - 1]]));
+          var non = [];
+          [ans + 1, ans + 2, n + 1, 7, 11, 13].forEach(function (x) { if (facs.indexOf(x) < 0 && non.indexOf(x) < 0 && x > 0) non.push(x); });
+          var wrongs = shuffle(non).slice(0, 2);
+          var opts = [{ label: "" + ans, value: ans }].concat(wrongs.map(function (x) { return { label: "" + x, value: x }; }));
+          opts.push({ label: "以上都有 None of these", value: -1 });
+          return {
+            q: "Which of these numbers is a factor of " + n + "?",
+            zh: "下面哪个数是 " + n + " 的因数？（能整除 " + n + " 的数）",
+            choices: opts, answer: ans, answerLabel: "" + ans,
+            explain: n + " ÷ " + ans + " = " + (n / ans) + "，整除没有余数，所以 " + ans + " 是因数。" + n + " 的全部因数：" + facs.join(", ") + "。"
+          };
+        }
+        if (kind === 1) {
+          var a = pick([4, 6, 3, 5]), b = pick([6, 8, 9, 10]);
+          if (a === b) b = 8;
+          var l = a * b / gcd(a, b);
+          var wrongs = shuffle([a * b, l + a, Math.max(a, b) * 2].filter(function (x) { return x !== l; })).slice(0, 3);
+          return {
+            q: "What is the LCM of " + a + " and " + b + "?",
+            zh: a + " 和 " + b + " 的最小公倍数是多少？",
+            choices: [{ label: "" + l, value: l }].concat(wrongs.map(function (x) { return { label: "" + x, value: x }; })),
+            answer: l, answerLabel: "" + l,
+            explain: "列倍数：" + a + " → " + multList(a, l).join(", ") + "；" + b + " → " + multList(b, l).join(", ") + "。第一个相同的就是 <b>" + l + "</b>。注意：直接相乘 " + (a * b) + " 是公倍数但不一定是最小的。"
+          };
+        }
+        if (kind === 2) {
+          var p = pick([[12, 18], [16, 24], [15, 20], [20, 30], [8, 12]]);
+          var h = gcd(p[0], p[1]);
+          var candH = [h * 2, Math.min(p[0], p[1]), 2, 3, h + 1, p[0]];
+          var wrongs = [];
+          shuffle(candH).forEach(function (x) { if (x !== h && wrongs.indexOf(x) < 0) wrongs.push(x); });
+          wrongs = wrongs.slice(0, 3);
+          return {
+            q: "What is the HCF of " + p[0] + " and " + p[1] + "?",
+            zh: p[0] + " 和 " + p[1] + " 的最大公因数是多少？",
+            choices: [{ label: "" + h, value: h }].concat(wrongs.map(function (x) { return { label: "" + x, value: x }; })),
+            answer: h, answerLabel: "" + h,
+            explain: p[0] + " 的因数：" + allFactors(p[0]).join(", ") + "；" + p[1] + " 的因数：" + allFactors(p[1]).join(", ") + "。相同的因数里最大的是 <b>" + h + "</b>。"
+          };
+        }
+        var primes = [7, 11, 13, 17, 19, 23, 29];
+        var comps = [9, 15, 21, 25, 27, 33, 39, 51];
+        var ansP = pick(primes);
+        var wrongP = shuffle(comps).slice(0, 3);
+        return {
+          q: "Which of these numbers is a prime number?",
+          zh: "下面哪个是质数？（恰好只有 2 个因数的数）",
+          choices: [{ label: "" + ansP, value: ansP }].concat(wrongP.map(function (x) { return { label: "" + x, value: x }; })),
+          answer: ansP, answerLabel: "" + ansP,
+          explain: ansP + " 的因数只有 1 和 " + ansP + "，所以是质数。其他几个都有别的因数，比如 " + wrongP[0] + " 能被 3 整除。小心 51 = 3 × 17，它不是质数！"
+        };
+      }
+      mcPractice("fp", genFP);
+
+      /* ================================================================
+         FINAL CHALLENGE · 20 questions, 5 per skill
+         types: mc {choices:[{label,value}], answer}, input {answer}, order {items, sorted}
+      ================================================================ */
+      var SKILLS = {
+        round: "四舍五入 Rounding",
+        neg: "负数 Negatives",
+        roman: "罗马数字 Roman",
+        factor: "因数与质数 Factors & Primes"
+      };
+      function qRound1() {
+        var n = randInt(10000, 999999), pow = pick([2, 3, 4, 5]);
+        var ans = roundTo(n, pow);
+        return { skill: "round", type: "mc", q: "Round " + fmt(n) + " to the nearest " + POW_NAMES[pow] + ".",
+          zh: "把 " + fmt(n) + " 舍到最近的 " + POW_NAMES[pow] + "。",
+          choices: roundChoices(n, pow), answer: ans,
+          explain: "只看决定位（" + PLACE_NAMES[pow - 1] + "）：" + fmt(n) + " 的那一位是 " + (Math.floor(n / Math.pow(10, pow - 1)) % 10) + "，" + (Math.floor(n / Math.pow(10, pow - 1)) % 10 >= 5 ? "≥5 进位" : "≤4 舍去") + " → <b>" + fmt(ans) + "</b>。" };
+      }
+      function qRound2() {
+        var pow = pick([2, 3]), u = Math.pow(10, pow);
+        var R = randInt(15, 95) * u;
+        var askSmall = Math.random() < 0.5, half = u / 2;
+        var ans = askSmall ? R - half : R + half - 1;
+        return { skill: "round", type: "input",
+          q: "A number rounded to the nearest " + POW_NAMES[pow] + " is " + fmt(R) + ". What is the " + (askSmall ? "smallest" : "largest") + " whole number it could be?",
+          zh: "逆向四舍五入：舍到最近的 " + POW_NAMES[pow] + " 是 " + fmt(R) + "，原数" + (askSmall ? "最小" : "最大") + "是多少？",
+          answer: ans,
+          explain: "半格 = " + fmt(half) + "。" + (askSmall ? "最小 = " + fmt(R) + " − " + fmt(half) + " = <b>" + fmt(ans) + "</b>（正好半格，决定位是 5，要进位，所以包含它）。" : "最大 = " + fmt(R) + " + " + fmt(half) + " − 1 = <b>" + fmt(ans) + "</b>（再大 1 就舍到下一个了）。") };
+      }
+      function qRound3() {
+        var n = pick([23550, 999500, 38500, 1250, 455, 76500]);
+        var pow = n >= 10000 ? 3 : (n >= 1000 ? 2 : 1);
+        if (n === 999500) pow = 3;
+        var ans = roundTo(n, pow);
+        return { skill: "round", type: "mc",
+          q: "Round " + fmt(n) + " to the nearest " + POW_NAMES[pow] + ".",
+          zh: "注意决定位正好是 5 的情况：5 要进位。",
+          choices: roundChoices(n, pow), answer: ans,
+          explain: "决定位是 <b>5</b>，规则是「5 进位」（round half up），所以 " + fmt(n) + " → <b>" + fmt(ans) + "</b>。" + (n === 999500 ? " 999,500 的千位决定位是 5，进位后一路满到 1,000,000！" : "") };
+      }
+      function qRound4() {
+        var data = pick([
+          { n: 4499, ans: 4000, wrong: 5000, why: "百位是 4，舍去。如果先舍到 100 变 4,500 再舍到 1,000，就会错成 5,000 —— 不能舍两次！" },
+          { n: 4549, ans: 5000, wrong: 4000, why: "只看百位 5，进位。去看十位 4 而舍成 4,000 是看错位。" },
+          { n: 9499, ans: 9000, wrong: 10000, why: "百位是 4，舍去。先舍到 100 会变 9,500，再舍就错成 10,000。" }
+        ]);
+        return { skill: "round", type: "mc",
+          q: "Which rounding is correct? Round " + fmt(data.n) + " to the nearest 1,000.",
+          zh: "陷阱题：哪个才是对的？",
+          choices: [{ label: fmt(data.ans), value: data.ans }, { label: fmt(data.wrong), value: data.wrong }, { label: fmt(data.ans - 1000), value: data.ans - 1000 }, { label: fmt(data.ans + 2000), value: data.ans + 2000 }],
+          answer: data.ans,
+          explain: "<b>" + fmt(data.ans) + "</b> 才对：" + data.why };
+      }
+      function qRound5() {
+        var g = genWP();
+        return { skill: "round", type: "mc", q: g.q, zh: g.zh, choices: g.choices, answer: g.answer, explain: g.explain };
+      }
+      function qNeg1() {
+        var set = pick(noSets);
+        return { skill: "neg", type: "order",
+          q: "Put these numbers in order, smallest first.",
+          zh: "从小到大依次点。",
+          items: set.slice(), sorted: set.slice().sort(function (a, b) { return a - b; }),
+          explain: "从小到大：<b>" + set.slice().sort(function (a, b) { return a - b; }).map(fmtNeg).join(", ") + "</b>。负数离 0 越远越小；0 比所有负数大、比所有正数小。" };
+      }
+      function qNeg2() {
+        var a = pick([-11, -14, -8, -17]), b = pick([-3, -5, -2, -6]);
+        var d = Math.abs(a - b);
+        return { skill: "neg", type: "input",
+          q: "The temperature in the morning is " + fmtNeg(a) + "°C and in the afternoon it is " + fmtNeg(b) + "°C. What is the difference between the two temperatures?",
+          zh: "两个都是负数：数一数数轴上它们之间有几格。",
+          answer: d,
+          explain: "在数轴上从 " + fmtNeg(Math.min(a, b)) + " 走到 " + fmtNeg(Math.max(a, b)) + " 一共 <b>" + d + "</b> 格，所以温差是 <b>" + d + "°C</b>。温差永远是正数。" };
+      }
+      function qNeg3() {
+        var start = randInt(-8, 3), fall = randInt(2, 6), rise = randInt(4, 10);
+        var ans = start - fall + rise;
+        return { skill: "neg", type: "input",
+          q: "It is " + fmtNeg(start) + "°C at midnight. The temperature falls by " + fall + " degrees, then rises by " + rise + " degrees. What is the temperature now?",
+          zh: "分两步走：先降后升。",
+          answer: ans,
+          explain: fmtNeg(start) + " 降 " + fall + " → " + fmtNeg(start - fall) + "；再升 " + rise + " → <b>" + fmtNeg(ans) + "°C</b>。" };
+      }
+      function qNeg4() {
+        var c = pick(CALCS);
+        return { skill: "neg", type: "input",
+          q: "Work out: " + calcLabel(c),
+          zh: "在数轴上走一走：加法向右，减法向左。",
+          answer: calcResult(c),
+          explain: "从 " + fmtNeg(c.s) + " 出发" + (c.op === "+" ? "向右" : "向左") + "走 " + c.n + " 格，路过 0 不停，落在 <b>" + fmtNeg(calcResult(c)) + "</b>。" };
+      }
+      function qNeg5() {
+        var opts = [
+          { q: "Which is the coldest temperature?", zh: "哪个温度最冷（最小）？", list: [-8, -12, -3, 0], ans: -12, ex: "最冷就是最小：数轴上最靠左的是 <b>−12</b>。负数绝对值越大反而越小。" },
+          { q: "Which number is greater: −4 or −9?", zh: "−4 和 −9 哪个大？", list: [-4, -9], ans: -4, ex: "−4 离 0 更近、在数轴上更靠右，所以 <b>−4 更大</b>。" },
+          { q: "Which is the warmest temperature?", zh: "哪个温度最暖（最大）？", list: [-15, -7, -20, -1], ans: -1, ex: "最暖就是最大：−1 最靠右，所以 <b>−1</b> 最暖。" }
+        ];
+        var o = pick(opts);
+        return { skill: "neg", type: "mc", q: o.q, zh: o.zh,
+          choices: o.list.map(function (v) { return { label: fmtNeg(v) + (o.list.length > 2 ? "°C" : ""), value: v }; }),
+          answer: o.ans, explain: o.ex };
+      }
+      function qRoman1() {
+        var n = pick([58, 94, 199, 472, 944, 746, 389]);
+        var ans = toRoman(n);
+        var wrong = shuffle([toRoman(n + 1), toRoman(n - 1), toRoman(n + 10)]).filter(function (x) { return x !== ans; }).slice(0, 3);
+        return { skill: "roman", type: "mc", q: "Write " + fmt(n) + " in Roman numerals.", zh: "按数位拆开拼。",
+          choices: [{ label: ans, value: ans }].concat(wrong.map(function (x) { return { label: x, value: x }; })),
+          answer: ans,
+          explain: fmt(n) + " = " + romanPartsOf(n).map(function (p) { return fmt(p.num); }).join(" + ") + " → " + romanPartsOf(n).map(function (p) { return p.rom; }).join(" + ") + " = <b>" + ans + "</b>。" };
+      }
+      function qRoman2() {
+        var r = pick(["CMXLIV", "CXCIX", "LVIII", "CDLXXII", "MMXXVI", "DCCCXC"]);
+        var v = fromRoman(r);
+        var wrong = shuffle([v + 1, v - 1, v + 10, v + 100].filter(function (x) { return x !== v && x > 0; })).slice(0, 3);
+        return { skill: "roman", type: "mc", q: "What number is " + r + "?", zh: "一段一段读：小符号在前面要减。",
+          choices: [{ label: fmt(v), value: v }].concat(wrong.map(function (x) { return { label: fmt(x), value: x }; })),
+          answer: v,
+          explain: r + " = " + romanBreakdown(r).map(function (p) { return p.sym + "=" + fmt(p.val); }).join(", ") + "，加起来 = <b>" + fmt(v) + "</b>。" };
+      }
+      function qRoman3() {
+        var g = genRO();
+        while (g.q.indexOf("WRONG") < 0) g = genRO();
+        return { skill: "roman", type: "mc", q: g.q, zh: g.zh, choices: g.choices, answer: g.answer, explain: g.explain };
+      }
+      function qRoman4() {
+        var a = pick([["XL", "LX"], ["XC", "CX"], ["CD", "DC"], ["IV", "VI"]]);
+        var va = fromRoman(a[0]), vb = fromRoman(a[1]);
+        var bigger = va > vb ? a[0] : a[1];
+        return { skill: "roman", type: "mc", q: "Which is the larger number: " + a[0] + " or " + a[1] + "?", zh: "先各读出数值再比较。",
+          choices: a.map(function (x) { return { label: x, value: x }; }),
+          answer: bigger,
+          explain: a[0] + " = " + va + "，" + a[1] + " = " + vb + "，所以 <b>" + bigger + "</b> 更大。记住：小符号在前面是减（XL = 40），在后面是加（LX = 60）。" };
+      }
+      function qRoman5() {
+        var year = pick([2026, 2024, 1999, 2012]);
+        var ans = toRoman(year);
+        var wrong = shuffle([toRoman(year + 1), toRoman(year - 1), toRoman(year - 10)]).slice(0, 3);
+        return { skill: "roman", type: "input", q: "Write the year " + fmt(year) + " in Roman numerals.", zh: "输入罗马数字（大写字母）。",
+          answer: ans, textAnswer: true,
+          explain: fmt(year) + " = " + romanPartsOf(year).map(function (p) { return fmt(p.num); }).join(" + ") + " → <b>" + ans + "</b>。" };
+      }
+      function qFactor1() {
+        var n = pick([36, 48]);
+        var cnt = allFactors(n).length;
+        return { skill: "factor", type: "mc", q: "How many factors does " + n + " have?", zh: "成对找因数，数一数。",
+          choices: shuffle([cnt, cnt - 1, cnt + 1, cnt + 2]).map(function (x) { return { label: "" + x, value: x }; }),
+          answer: cnt,
+          explain: n + " 的因数对：" + factorPairs(n).map(function (p) { return p[0] + "×" + p[1]; }).join("、") + "。全部因数 " + allFactors(n).join(", ") + "，一共 <b>" + cnt + "</b> 个。" + (n === 36 ? " 36 = 6×6，中间的 6 只算一次，所以是奇数个。" : "") };
+      }
+      function qFactor2() {
+        var l = 12;
+        return { skill: "factor", type: "mc", q: "What is the LCM of 4 and 6?", zh: "列倍数，找第一个相同的。",
+          choices: [{ label: "12", value: 12 }, { label: "24", value: 24 }, { label: "6", value: 6 }, { label: "10", value: 10 }],
+          answer: l,
+          explain: "4 的倍数：4, 8, <b>12</b>…；6 的倍数：6, <b>12</b>…。第一个相同的是 <b>12</b>。24 也是公倍数，但不是最小的。" };
+      }
+      function qFactor3() {
+        return { skill: "factor", type: "mc", q: "What is the HCF of 12 and 18?", zh: "列因数，找相同的里面最大的。",
+          choices: [{ label: "6", value: 6 }, { label: "3", value: 3 }, { label: "36", value: 36 }, { label: "9", value: 9 }],
+          answer: 6,
+          explain: "12 的因数：1, 2, 3, 4, 6, 12；18 的因数：1, 2, 3, 6, 9, 18。公因数有 1、2、3、6，最大的是 <b>6</b>。" };
+      }
+      function qFactor4() {
+        return { skill: "factor", type: "mc", q: "Which of these numbers is prime?", zh: "小心陷阱：51 看着像质数，其实 51 = 3 × 17。",
+          choices: [{ label: "29", value: 29 }, { label: "51", value: 51 }, { label: "27", value: 27 }, { label: "1", value: 1 }],
+          answer: 29,
+          explain: "<b>29</b> 的因数只有 1 和 29，是质数。51 = 3 × 17、27 = 3 × 9，都是合数；<b>1 既不是质数也不是合数</b>。" };
+      }
+      function qFactor5() {
+        var kind = Math.random() < 0.5;
+        if (kind) {
+          return { skill: "factor", type: "input", q: "Buses leave a station every 4 minutes and every 6 minutes. They leave together at 10:00. In how many minutes will they next leave together?", zh: "找 4 和 6 的 LCM。",
+            answer: 12,
+            explain: "4 的倍数：4, 8, 12…；6 的倍数：6, 12…。LCM = <b>12</b>，所以 12 分钟后（10:12）再次同时发车。" };
+        }
+        return { skill: "factor", type: "input", q: "12 red pens and 18 blue pens are put into identical packs with none left over. What is the greatest number of packs?", zh: "找 12 和 18 的 HCF。",
+          answer: 6,
+          explain: "组数要同时整除 12 和 18，最多就是 HCF = <b>6</b> 组（每组 2 支红笔 + 3 支蓝笔）。" };
+      }
+      function buildQuiz() {
+        var qs = [qRound1(), qRound2(), qRound3(), qRound4(), qRound5(),
+                  qNeg1(), qNeg2(), qNeg3(), qNeg4(), qNeg5(),
+                  qRoman1(), qRoman2(), qRoman3(), qRoman4(), qRoman5(),
+                  qFactor1(), qFactor2(), qFactor3(), qFactor4(), qFactor5()];
+        return shuffle(qs);
+      }
+
+      var quiz = { list: [], idx: 0, score: 0, per: {}, answered: false, orderPicked: [] };
+      function quizReset() {
+        quiz.list = buildQuiz();
+        quiz.idx = 0; quiz.score = 0;
+        quiz.per = { round: [0, 0], neg: [0, 0], roman: [0, 0], factor: [0, 0] };
+        $("quizCard").style.display = "block";
+        $("resultCard").style.display = "none";
+        quizRender();
+      }
+      function quizRender() {
+        var q = quiz.list[quiz.idx];
+        quiz.answered = false; quiz.orderPicked = [];
+        $("qProgress").textContent = "第 " + (quiz.idx + 1) + " / " + quiz.list.length + " 题 · " + SKILLS[q.skill];
+        $("qScore").textContent = "⭐ 得分 Score: " + quiz.score;
+        $("qBar").style.width = (quiz.idx / quiz.list.length) * 100 + "%";
+        $("qFb").textContent = ""; $("qFb").className = "feedback";
+        $("qEx").className = "explain"; $("qEx").innerHTML = "";
+        $("qNext").style.display = "none";
+        var body = $("qBody"); body.innerHTML = "";
+        var h = '<p class="q-text"><span class="qnum">' + (quiz.idx + 1) + "</span>" + q.q + '</p><p class="q-zh">' + (q.zh || "") + "</p>";
+        body.innerHTML = h;
+        if (q.type === "mc") {
+          var box = document.createElement("div");
+          box.className = "choices";
+          body.appendChild(box);
+          shuffle(q.choices).forEach(function (c) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "choice"; b.textContent = c.label;
+            b.addEventListener("click", function () {
+              if (quiz.answered) return;
+              box.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+              var ok = c.value === q.answer;
+              if (ok) b.classList.add("right");
+              else {
+                b.classList.add("wrong");
+                box.querySelectorAll("button").forEach(function (x) {
+                  var cc = q.choices.filter(function (y) { return y.label === x.textContent; })[0];
+                  if (cc && cc.value === q.answer) x.classList.add("right");
+                });
+              }
+              quizFinish(ok, q);
+            });
+            box.appendChild(b);
+          });
+        } else if (q.type === "input") {
+          var row = document.createElement("div");
+          row.className = "ans-row";
+          row.innerHTML = '<input class="ans-input" id="qInput" autocomplete="off" aria-label="你的答案" /><button class="btn teal" id="qCheck" type="button">检查 Check</button>';
+          body.appendChild(row);
+          $("qCheck").addEventListener("click", function () {
+            if (quiz.answered) return;
+            var raw = $("qInput").value;
+            var ok;
+            if (q.textAnswer) {
+              ok = (raw || "").toUpperCase().replace(/\s/g, "") === q.answer;
+            } else {
+              var v = parseAns(raw);
+              if (isNaN(v)) { $("qFb").textContent = "先输入答案再检查。"; $("qFb").className = "feedback bad"; return; }
+              ok = v === q.answer;
+            }
+            $("qCheck").disabled = true; $("qInput").disabled = true;
+            quizFinish(ok, q);
+          });
+        } else if (q.type === "order") {
+          var pool = document.createElement("div");
+          pool.className = "order-pool";
+          body.appendChild(pool);
+          shuffle(q.items).forEach(function (v) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "order-chip";
+            b.innerHTML = fmtNeg(v) + '<span class="rank"></span>';
+            b.setAttribute("data-v", v);
+            b.addEventListener("click", function () {
+              if (quiz.answered) return;
+              var i = quiz.orderPicked.indexOf(v);
+              if (i >= 0) quiz.orderPicked.splice(i, 1); else quiz.orderPicked.push(v);
+              quizPaintOrder(pool);
+            });
+            pool.appendChild(b);
+          });
+          var chk = document.createElement("div");
+          chk.className = "btnrow";
+          chk.innerHTML = '<button class="btn primary" id="qOrderCheck" type="button">检查 Check</button>';
+          body.appendChild(chk);
+          $("qOrderCheck").addEventListener("click", function () {
+            if (quiz.answered) return;
+            if (quiz.orderPicked.length !== q.items.length) {
+              $("qFb").textContent = "还没点完哦。"; $("qFb").className = "feedback bad"; return;
+            }
+            var ok = quiz.orderPicked.every(function (v, i) { return v === q.sorted[i]; });
+            pool.querySelectorAll(".order-chip").forEach(function (b) { b.classList.add(ok ? "right" : "wrong"); b.disabled = true; });
+            $("qOrderCheck").disabled = true;
+            quizFinish(ok, q);
+          });
+        }
+      }
+      function quizPaintOrder(pool) {
+        pool.querySelectorAll(".order-chip").forEach(function (b) {
+          var v = +b.getAttribute("data-v");
+          var i = quiz.orderPicked.indexOf(v);
+          b.classList.toggle("picked", i >= 0);
+          if (i >= 0) b.querySelector(".rank").textContent = i + 1;
+        });
+      }
+      function quizFinish(ok, q) {
+        quiz.answered = true;
+        quiz.per[q.skill][1]++;
+        if (ok) { quiz.score++; quiz.per[q.skill][0]++; }
+        $("qScore").textContent = "⭐ 得分 Score: " + quiz.score;
+        $("qBar").style.width = ((quiz.idx + 1) / quiz.list.length) * 100 + "%";
+        $("qFb").textContent = ok ? praise() : "不对，看看方法，下次就会了。";
+        $("qFb").className = "feedback " + (ok ? "good" : "bad");
+        var ex = $("qEx");
+        ex.innerHTML = q.explain;
+        ex.classList.add("show");
+        var nx = $("qNext");
+        nx.textContent = quiz.idx + 1 >= quiz.list.length ? "看成绩 See results →" : "下一题 Next →";
+        nx.style.display = "inline-flex";
+      }
+      $("qNext").addEventListener("click", function () {
+        quiz.idx++;
+        if (quiz.idx >= quiz.list.length) quizResults();
+        else quizRender();
+      });
+      function quizResults() {
+        $("quizCard").style.display = "none";
+        $("resultCard").style.display = "block";
+        var total = quiz.list.length, s = quiz.score;
+        $("resStars").textContent = s >= 18 ? "⭐⭐⭐" : s >= 13 ? "⭐⭐☆" : s >= 8 ? "⭐☆☆" : "☆☆☆";
+        $("resLine").textContent = "得分 Score: " + s + " / " + total + (s >= 18 ? " —— 太出色了，考试水平！" : s >= 13 ? " —— 很好，再把弱项补一补！" : s >= 8 ? " —— 不错的开始，看下面哪项要多练。" : " —— 没关系，对着分项一项一项回来练。");
+        var box = $("resSkills"); box.innerHTML = "";
+        var advice = {
+          round: "回 A 部分再玩决定位侦探和逆向四舍五入。",
+          neg: "回 B 部分再练排序和数轴计算。",
+          roman: "回 C 部分用拼搭机和解码器多拼几个数。",
+          factor: "回 D 部分再玩因数彩虹和质数筛。"
+        };
+        Object.keys(SKILLS).forEach(function (k) {
+          var got = quiz.per[k][0], all = quiz.per[k][1];
+          var pct = all ? Math.round((got / all) * 100) : 0;
+          var row = document.createElement("div");
+          row.innerHTML = '<div class="skill-row"><span class="sname">' + SKILLS[k] + '</span><span class="sbar"><span class="sfill' + (pct < 80 ? " weak" : "") + '" style="display:block;width:' + pct + '%"></span></span><span class="sscore">' + got + " / " + all + "</span></div>" +
+            (pct < 100 ? '<p class="skill-note">还差一点：' + advice[k] + "</p>" : '<p class="skill-note">这一项全对，掌握得很稳！✅</p>');
+          box.appendChild(row);
+        });
+        $("resultCard").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      $("quizRestart").addEventListener("click", quizReset);
+      quizReset();
+    </script>
+  </body>
+</html>
