@@ -1,0 +1,1430 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>11+ Maths: Place Value, Rounding &amp; Negative Numbers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.75rem; }
+      * { box-sizing: border-box; }
+      :root{
+        --bg:#FFF6E9; --card:#FFFFFF; --card2:#FFF1D6;
+        --ink:#22304A; --muted:#5B6B82;
+        --coral:#F2603E; --coral-d:#C74524;
+        --teal:#0E9594; --teal-d:#0A6E6D;
+        --sun:#FFB627; --sky:#3E92CC;
+        --good:#2E9E5B; --bad:#D93A2B;
+        --line:#EDDCBE; --chip:#FDEBD2;
+        --neg:#3E92CC; --pos:#F2603E;
+        --shadow:0 4px 0 rgba(34,48,74,.08), 0 10px 24px rgba(34,48,74,.08);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#121C2C; --card:#1D2A40; --card2:#24334F;
+          --ink:#F2F5FA; --muted:#A9B8CC;
+          --coral:#FF7A57; --coral-d:#FF9A80;
+          --teal:#2FBFBF; --teal-d:#5ED6D6;
+          --sun:#FFC53D; --sky:#6FB6E8;
+          --good:#4CC47C; --bad:#FF6B5E;
+          --line:#33445E; --chip:#2A3C5C;
+          --neg:#6FB6E8; --pos:#FF7A57;
+          --shadow:0 4px 0 rgba(0,0,0,.25), 0 10px 24px rgba(0,0,0,.3);
+        }
+      }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0; background:var(--bg); color:var(--ink);
+        font-family:"Nunito","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+        font-size:17px; line-height:1.55;
+        -webkit-text-size-adjust:100%;
+      }
+      .num, h1, h2, h3, .big-num{ font-family:"Baloo 2","Nunito","PingFang SC","Microsoft YaHei",sans-serif; }
+      main{ max-width:880px; margin:0 auto; padding:0 16px 64px; }
+      header.hero{ padding:28px 4px 6px; }
+      header.hero h1{ font-size:clamp(28px,6vw,44px); line-height:1.15; margin:0 0 6px; font-weight:800; }
+      header.hero h1 .en{ color:var(--coral); }
+      header.hero p{ margin:0; color:var(--muted); font-size:17px; max-width:60ch; }
+      .tagrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+      .tag{ background:var(--chip); border:2px solid var(--line); border-radius:999px; padding:6px 14px; font-weight:800; font-size:14px; }
+      nav.toc{
+        position:sticky; top:0; z-index:20; display:flex; gap:8px; overflow-x:auto;
+        padding:10px 2px; background:var(--bg); scrollbar-width:none;
+      }
+      nav.toc::-webkit-scrollbar{ display:none; }
+      nav.toc a{
+        flex:0 0 auto; text-decoration:none; color:var(--ink); font-weight:800; font-size:15px;
+        background:var(--card); border:2px solid var(--line); border-radius:999px; padding:10px 16px; min-height:44px;
+        display:inline-flex; align-items:center;
+      }
+      nav.toc a:active{ transform:scale(.97); }
+      section{ margin-top:34px; }
+      .sec-head{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+      .sec-badge{
+        flex:0 0 auto; width:46px; height:46px; border-radius:14px; display:grid; place-items:center;
+        font-family:"Baloo 2"; font-weight:800; font-size:22px; color:#fff;
+      }
+      .badge-a{ background:var(--coral); } .badge-b{ background:var(--sky); } .badge-c{ background:var(--teal); }
+      .sec-head h2{ margin:0; font-size:clamp(22px,4.5vw,30px); font-weight:800; line-height:1.2; }
+      .sec-head h2 .en{ display:block; font-size:.62em; color:var(--muted); font-weight:700; }
+      .sec-sub{ color:var(--muted); margin:2px 0 16px; }
+      .card{
+        background:var(--card); border:2px solid var(--line); border-radius:20px;
+        padding:20px; margin-bottom:18px; box-shadow:var(--shadow);
+      }
+      .card h3{ margin:0 0 8px; font-size:21px; font-weight:800; }
+      .card h3 .step{
+        display:inline-block; background:var(--sun); color:#4A3200; border-radius:8px;
+        font-size:13px; padding:2px 9px; vertical-align:3px; margin-right:8px; font-weight:800;
+      }
+      .card p{ margin:6px 0; }
+      .zh-note{ color:var(--muted); font-size:15px; }
+      .en-term{ font-weight:800; }
+      .rule-box{
+        background:var(--card2); border-radius:14px; padding:14px 16px; margin:12px 0;
+        font-weight:700;
+      }
+      .rule-box .chant{ font-family:"Baloo 2"; font-size:19px; font-weight:800; color:var(--coral-d); }
+      @media (prefers-color-scheme: dark){ .rule-box .chant{ color:var(--sun); } }
+
+      /* ---------- buttons ---------- */
+      .btn{
+        font-family:inherit; font-weight:800; font-size:16px; cursor:pointer;
+        border:2px solid var(--line); background:var(--card); color:var(--ink);
+        border-radius:14px; padding:10px 18px; min-height:48px;
+        display:inline-flex; align-items:center; justify-content:center; gap:8px;
+        transition:transform .08s ease, background .15s ease;
+        touch-action:manipulation; user-select:none; -webkit-user-select:none;
+      }
+      .btn:active{ transform:scale(.96); }
+      .btn.primary{ background:var(--coral); border-color:var(--coral); color:#fff; }
+      .btn.teal{ background:var(--teal); border-color:var(--teal); color:#fff; }
+      .btn.sky{ background:var(--sky); border-color:var(--sky); color:#fff; }
+      .btn.ghost{ background:transparent; }
+      .btn:disabled{ opacity:.45; cursor:default; transform:none; }
+      .btnrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+      .feedback{ margin-top:12px; font-weight:800; font-size:17px; min-height:1.4em; }
+      .feedback.good{ color:var(--good); }
+      .feedback.bad{ color:var(--bad); }
+      .explain{
+        margin-top:10px; background:var(--card2); border-radius:12px; padding:12px 14px;
+        font-size:15.5px; display:none;
+      }
+      .explain.show{ display:block; }
+      .explain b{ color:var(--coral-d); }
+      @media (prefers-color-scheme: dark){ .explain b{ color:var(--sun); } }
+
+      /* ---------- place value chart ---------- */
+      .pv-scroll{ overflow-x:auto; padding-bottom:6px; }
+      .pv-chart{ display:grid; grid-template-columns:repeat(7,minmax(86px,1fr)); gap:8px; min-width:640px; }
+      .pv-col{ text-align:center; }
+      .pv-head{
+        border-radius:12px 12px 0 0; padding:8px 2px 6px; color:#fff; font-weight:800; font-size:13px; line-height:1.25;
+      }
+      .pv-head .en2{ display:block; font-size:11px; opacity:.9; font-weight:700; }
+      .pv-digit{
+        font-family:"Baloo 2"; font-size:44px; font-weight:800; line-height:1.1;
+        background:var(--card2); border:3px solid transparent; border-top:none;
+        padding:8px 0 4px; cursor:pointer; min-height:64px;
+      }
+      .pv-col.sel .pv-digit{ border-color:var(--sun); background:var(--chip); }
+      .pv-stepper{ display:flex; gap:6px; justify-content:center; margin-top:8px; }
+      .pv-stepper button{
+        width:44px; height:44px; border-radius:12px; border:2px solid var(--line);
+        background:var(--card); color:var(--ink); font-size:20px; font-weight:800; cursor:pointer;
+        font-family:"Baloo 2"; touch-action:manipulation;
+      }
+      .pv-stepper button:active{ transform:scale(.93); background:var(--chip); }
+      .pv-val{ font-size:12.5px; color:var(--muted); font-weight:700; margin-top:6px; min-height:2.4em; }
+      .c0{ background:#B3541E; } .c1{ background:#D96C2C; } .c2{ background:#E8893B; }
+      .c3{ background:#0E9594; } .c4{ background:#3E92CC; } .c5{ background:#5B7FBF; } .c6{ background:#7A6FC0; }
+      .big-display{
+        text-align:center; margin:18px 0 4px;
+      }
+      .big-display .big-num{ font-size:clamp(38px,9vw,58px); font-weight:800; letter-spacing:1px; }
+      .words{
+        text-align:center; font-size:19px; font-weight:700; color:var(--teal-d);
+        background:var(--card2); border-radius:14px; padding:12px 16px; margin-top:10px; min-height:56px;
+      }
+      @media (prefers-color-scheme: dark){ .words{ color:var(--teal-d); } }
+      .digit-fact{
+        text-align:center; font-size:18px; font-weight:800; margin-top:12px; min-height:1.6em;
+      }
+      .digit-fact .hl{ color:var(--coral); font-family:"Baloo 2"; font-size:1.25em; }
+
+      /* ---------- choice buttons / quiz ---------- */
+      .choices{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+      @media (max-width:520px){ .choices{ grid-template-columns:1fr; } }
+      .choice{
+        font-family:"Baloo 2"; font-size:21px; font-weight:700; padding:14px 12px;
+        border-radius:14px; border:3px solid var(--line); background:var(--card); color:var(--ink);
+        cursor:pointer; min-height:56px; touch-action:manipulation;
+      }
+      .choice:active{ transform:scale(.97); }
+      .choice.right{ border-color:var(--good); background:rgba(46,158,91,.14); }
+      .choice.wrong{ border-color:var(--bad); background:rgba(217,58,43,.12); }
+      .choice:disabled{ cursor:default; opacity:.85; }
+      .q-text{ font-size:19px; font-weight:700; }
+      .q-text .qnum{
+        display:inline-block; background:var(--teal); color:#fff; border-radius:8px;
+        padding:1px 10px; margin-right:8px; font-family:"Baloo 2"; font-size:16px; vertical-align:2px;
+      }
+      .q-zh{ color:var(--muted); font-size:15px; font-weight:600; margin-top:2px; }
+      .sign-btns{ display:flex; gap:10px; justify-content:center; margin-top:14px; }
+      .sign-btns button{
+        width:76px; height:64px; font-size:32px; font-family:"Baloo 2"; font-weight:800;
+        border-radius:16px; border:3px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+        touch-action:manipulation;
+      }
+      .sign-btns button.right{ border-color:var(--good); background:rgba(46,158,91,.14); }
+      .sign-btns button.wrong{ border-color:var(--bad); background:rgba(217,58,43,.12); }
+      .vs-row{
+        display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+        font-family:"Baloo 2"; font-size:clamp(24px,6vw,36px); font-weight:800; margin-top:8px;
+      }
+      .vs-row .mid{ width:52px; text-align:center; color:var(--coral); }
+      .ans-input{
+        font-family:"Baloo 2"; font-size:24px; font-weight:700; text-align:center;
+        width:min(280px,100%); padding:10px; border-radius:14px;
+        border:3px solid var(--line); background:var(--card); color:var(--ink);
+      }
+      .ans-input:focus{ outline:none; border-color:var(--teal); }
+      .ans-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+
+      /* ---------- ordering game ---------- */
+      .order-pool{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+      .order-chip{
+        font-family:"Baloo 2"; font-size:21px; font-weight:700; padding:12px 16px; min-height:52px;
+        border-radius:14px; border:3px solid var(--line); background:var(--card2); color:var(--ink);
+        cursor:pointer; position:relative; touch-action:manipulation;
+      }
+      .order-chip .rank{
+        position:absolute; top:-11px; left:-9px; width:26px; height:26px; border-radius:50%;
+        background:var(--coral); color:#fff; font-size:15px; display:none; place-items:center; font-weight:800;
+      }
+      .order-chip.picked{ border-color:var(--coral); background:var(--card); }
+      .order-chip.picked .rank{ display:grid; }
+      .order-chip.right{ border-color:var(--good); }
+      .order-chip.wrong{ border-color:var(--bad); }
+
+      /* ---------- number lines ---------- */
+      .nl-wrap{ margin:26px 4px 8px; position:relative; }
+      .nl-track{
+        position:relative; height:10px; border-radius:5px;
+        background:linear-gradient(90deg, var(--neg) 0%, var(--neg) 50%, var(--pos) 50%, var(--pos) 100%);
+        opacity:.9;
+      }
+      .nl-ticks{ position:relative; height:30px; }
+      .nl-tick{
+        position:absolute; top:0; transform:translateX(-50%); text-align:center;
+        font-size:12.5px; font-weight:800; color:var(--muted); width:34px;
+      }
+      .nl-tick::before{
+        content:""; display:block; width:2px; height:9px; background:var(--muted); margin:0 auto 2px;
+      }
+      .nl-marker{
+        position:absolute; top:-13px; transform:translateX(-50%);
+        transition:left .45s cubic-bezier(.34,1.4,.5,1); z-index:3;
+      }
+      .nl-marker .pin{
+        width:36px; height:36px; border-radius:50% 50% 50% 4px; transform:rotate(-45deg);
+        background:var(--sun); border:3px solid #fff; box-shadow:0 3px 8px rgba(0,0,0,.25);
+        display:grid; place-items:center;
+      }
+      .nl-marker .pin span{
+        transform:rotate(45deg); font-family:"Baloo 2"; font-weight:800; font-size:14px; color:#4A3200;
+      }
+      .nl-pos{
+        text-align:center; font-family:"Baloo 2"; font-size:30px; font-weight:800; margin-top:16px;
+      }
+      .move-btns{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+      .move-btns button{
+        font-family:"Baloo 2"; font-size:19px; font-weight:800; min-width:64px; height:52px;
+        border-radius:14px; border:2px solid var(--line); cursor:pointer; touch-action:manipulation;
+        background:var(--card); color:var(--ink); padding:0 12px;
+      }
+      .move-btns button:active{ transform:scale(.94); }
+      .move-btns button.back{ background:rgba(62,146,204,.15); border-color:var(--sky); }
+      .move-btns button.fwd{ background:rgba(242,96,62,.13); border-color:var(--coral); }
+
+      /* rounding number line */
+      .rnl{ margin:30px 6px 4px; position:relative; }
+      .rnl-track{ position:relative; height:12px; border-radius:6px; background:var(--chip); border:2px solid var(--line); }
+      .rnl-fill{ position:absolute; top:0; bottom:0; left:0; border-radius:6px; background:var(--sun); opacity:.55; }
+      .rnl-dot{
+        position:absolute; top:50%; width:30px; height:30px; border-radius:50%;
+        background:var(--coral); border:3px solid #fff; box-shadow:0 3px 8px rgba(0,0,0,.25);
+        transform:translate(-50%,-50%); transition:left .3s ease; z-index:2;
+      }
+      .rnl-mid{
+        position:absolute; top:-8px; bottom:-8px; width:0; border-left:3px dashed var(--muted);
+        transform:translateX(-50%);
+      }
+      .rnl-labels{ position:relative; height:30px; margin-top:10px; font-family:"Baloo 2"; font-weight:800; font-size:16px; }
+      .rnl-labels span{ position:absolute; transform:translateX(-50%); white-space:nowrap; }
+      .rnl-labels .lo{ left:0; transform:none; }
+      .rnl-labels .hi{ right:0; left:auto; transform:none; }
+      .rnl-labels .midlab{ color:var(--muted); font-size:14px; }
+      input[type="range"]{ width:100%; accent-color:var(--coral); height:44px; }
+      .target-btns{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+      .target-btns button{
+        font-family:"Baloo 2"; font-weight:800; font-size:17px; padding:10px 16px; min-height:48px;
+        border-radius:12px; border:3px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+        touch-action:manipulation;
+      }
+      .target-btns button.on{ border-color:var(--coral); background:rgba(242,96,62,.13); }
+      .steps-list{ list-style:none; margin:14px 0 0; padding:0; counter-reset:st; }
+      .steps-list li{
+        padding:12px 14px 12px 52px; position:relative; background:var(--card2);
+        border-radius:12px; margin-bottom:10px; font-weight:600;
+        opacity:.35; filter:grayscale(.6); transition:opacity .3s ease, filter .3s ease;
+      }
+      .steps-list li.on{ opacity:1; filter:none; }
+      .steps-list li::before{
+        counter-increment:st; content:counter(st);
+        position:absolute; left:12px; top:10px; width:30px; height:30px; border-radius:50%;
+        background:var(--coral); color:#fff; font-family:"Baloo 2"; font-weight:800;
+        display:grid; place-items:center; font-size:16px;
+      }
+      .steps-list .digit-hl{
+        font-family:"Baloo 2"; font-weight:800; font-size:1.3em; padding:0 5px; border-radius:6px;
+        background:var(--sun); color:#4A3200;
+      }
+      .steps-list .digit-hl.blue{ background:var(--sky); color:#fff; }
+
+      /* thermometer */
+      .thermo-flex{ display:flex; gap:22px; align-items:stretch; flex-wrap:wrap; }
+      .thermo{
+        position:relative; width:74px; height:280px; margin:6px auto; flex:0 0 auto;
+      }
+      .thermo-tube{
+        position:absolute; left:50%; transform:translateX(-50%); top:0; width:30px; height:238px;
+        border:3px solid var(--line); border-bottom:none; border-radius:16px 16px 0 0;
+        background:var(--card); overflow:hidden;
+      }
+      .thermo-fill{
+        position:absolute; bottom:0; left:0; right:0; background:var(--sky);
+        transition:height .5s ease, background .5s ease;
+      }
+      .thermo-bulb{
+        position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:56px; height:56px;
+        border-radius:50%; border:3px solid var(--line); background:var(--sky); transition:background .5s ease;
+      }
+      .thermo-scale{ position:absolute; top:0; bottom:42px; left:calc(50% + 26px); width:44px; }
+      .thermo-scale span{
+        position:absolute; transform:translateY(50%); font-size:12.5px; font-weight:800; color:var(--muted);
+        font-family:"Baloo 2"; white-space:nowrap;
+      }
+      .thermo-scale span::before{
+        content:""; position:absolute; left:-12px; top:50%; width:8px; height:2px; background:var(--muted);
+      }
+      .temp-read{
+        font-family:"Baloo 2"; font-size:clamp(34px,8vw,48px); font-weight:800; text-align:center;
+      }
+      .temp-read.cold{ color:var(--sky); } .temp-read.warm{ color:var(--coral); }
+      .temp-side{ flex:1 1 260px; min-width:240px; }
+
+      /* quiz */
+      .progress-outer{ height:16px; border-radius:8px; background:var(--chip); border:2px solid var(--line); overflow:hidden; margin:12px 0 4px; }
+      .progress-inner{ height:100%; background:var(--teal); width:0%; transition:width .4s ease; border-radius:6px; }
+      .score-line{ display:flex; justify-content:space-between; font-weight:800; font-size:15px; color:var(--muted); }
+      .skill-row{ display:flex; align-items:center; gap:12px; margin:10px 0; }
+      .skill-row .sname{ flex:0 0 128px; font-weight:800; font-size:15px; }
+      .skill-row .sbar{ flex:1; height:18px; border-radius:9px; background:var(--chip); border:2px solid var(--line); overflow:hidden; }
+      .skill-row .sfill{ height:100%; background:var(--good); }
+      .skill-row .sfill.weak{ background:var(--sun); }
+      .skill-row .sscore{ flex:0 0 52px; text-align:right; font-family:"Baloo 2"; font-weight:800; }
+      .stars{ font-size:34px; letter-spacing:4px; text-align:center; }
+      footer{ text-align:center; color:var(--muted); font-size:14px; margin-top:40px; }
+      .kbd-hint{ font-size:13px; color:var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <h1>数位、估算与负数<br /><span class="en">Place Value, Rounding &amp; Negative Numbers</span></h1>
+        <p>11+ Year 5 数学第 1 单元的前两项：先动手玩懂方法，再做考试题。每一步都有中文讲解，数学词汇和题目用英文 —— 和考试一样。</p>
+        <div class="tagrow">
+          <span class="tag">🎯 目标：读、写、比较 1,000,000 以内的数</span>
+          <span class="tag">🎯 Rounding 四舍五入</span>
+          <span class="tag">🎯 Negative numbers 负数与温差</span>
+        </div>
+      </header>
+
+      <nav class="toc" aria-label="本页目录">
+        <a href="#pv">A1 · 数位 Place Value</a>
+        <a href="#compare">A2 · 比较大小</a>
+        <a href="#rounding">A3 · 四舍五入 Rounding</a>
+        <a href="#neg">B1 · 负数 Negative Numbers</a>
+        <a href="#temp">B2 · 温度与温差</a>
+        <a href="#quiz">🏆 期末挑战 Final Challenge</a>
+      </nav>
+
+      <!-- ================= TOPIC A1 : PLACE VALUE ================= -->
+      <section id="pv">
+        <div class="sec-head">
+          <div class="sec-badge badge-a">A1</div>
+          <h2>数位：每个数字站在哪个位置？<span class="en">Place Value — numbers up to 1,000,000</span></h2>
+        </div>
+        <p class="sec-sub">一个数字的「大小」不只看它本身，还要看它站在哪一位。站得越靠左，代表的值越大。</p>
+
+        <div class="card">
+          <h3><span class="step">LEARN 学一学</span>数位表 Place Value Chart</h3>
+          <p>从右往左，每一位是它右边一位的 <b>10 倍</b>。点一点下面的数字，或者按 <b>− / +</b> 换数字，拼出你自己的数！</p>
+          <div class="pv-scroll">
+            <div class="pv-chart" id="pvChart"></div>
+          </div>
+          <div class="big-display"><div class="big-num" id="pvNumber">472,351</div></div>
+          <div class="words" id="pvWords"></div>
+          <div class="digit-fact" id="pvFact"></div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn" id="pvRandom" type="button">🎲 随机一个数 Random</button>
+            <button class="btn" id="pvSpeak" type="button">🔊 听英文读法 Listen</button>
+            <button class="btn ghost" id="pvReset" type="button">回到例子 472,351</button>
+          </div>
+          <p class="zh-note">小提示：英文读大数时，先读千位以上的部分 + <span class="en-term">thousand</span>，百位后面要加 <span class="en-term">and</span>，例如 472,351 读作 “four hundred and seventy-two thousand, three hundred and fifty-one”。</p>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">TRY 试一试</span>这个数字值多少？ What's the value of this digit?</h3>
+          <p class="q-text" id="dvQ"></p>
+          <p class="q-zh" id="dvQZh"></p>
+          <div class="choices" id="dvChoices"></div>
+          <div class="feedback" id="dvFb"></div>
+          <div class="explain" id="dvEx"></div>
+          <div class="btnrow"><button class="btn teal" id="dvNext" type="button">再来一题 Another one →</button></div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC A2 : COMPARING ================= -->
+      <section id="compare">
+        <div class="sec-head">
+          <div class="sec-badge badge-a">A2</div>
+          <h2>比较大小：从左往右看<span class="en">Comparing &amp; Ordering Numbers</span></h2>
+        </div>
+        <p class="sec-sub">比较两个数有个秘诀：<b>从最左边一位开始，一位一位往右比</b>，谁先大谁就大，后面的位不用再看。</p>
+
+        <div class="card">
+          <h3><span class="step">LEARN 学一学</span>符号别记反啦</h3>
+          <div class="rule-box">
+            <p style="margin:0">鳄鱼嘴巴总是张向<b>大</b>的那一边：<span class="num" style="font-size:20px">5 &gt; 3</span>（5 大于 3，5 is <b>greater than</b> 3）<br />
+            <span class="num" style="font-size:20px">3 &lt; 5</span>（3 小于 5，3 is <b>less than</b> 5）<br />
+            一样大就用 <span class="num" style="font-size:20px">=</span>（<b>equal to</b>）。</p>
+          </div>
+          <p>例子：比较 <b class="num">83,4<span style="color:var(--coral)">1</span>7</b> 和 <b class="num">83,4<span style="color:var(--coral)">6</span>2</b>。十万位、万位、千位、百位都一样；比到十位：1 &lt; 6，所以 <b class="num">83,417 &lt; 83,462</b>，不用再看个位！</p>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">TRY 试一试</span>选符号 Choose the sign</h3>
+          <div class="vs-row"><span id="cmpA"></span><span class="mid" id="cmpMid">?</span><span id="cmpB"></span></div>
+          <div class="sign-btns" id="cmpSigns">
+            <button type="button" data-sign=">">&gt;</button>
+            <button type="button" data-sign="=">=</button>
+            <button type="button" data-sign="<">&lt;</button>
+          </div>
+          <div class="feedback" id="cmpFb" style="text-align:center"></div>
+          <div class="explain" id="cmpEx"></div>
+          <div class="btnrow" style="justify-content:center"><button class="btn teal" id="cmpNext" type="button">再来一题 Another one →</button></div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">TRY 试一试</span>排排序 Order the numbers</h3>
+          <p>按从小到大（<span class="en-term">smallest → largest</span>）的顺序，依次点下面的数字卡片。点错了再点一下可以取消。</p>
+          <div class="order-pool" id="ordPool"></div>
+          <div class="feedback" id="ordFb"></div>
+          <div class="explain" id="ordEx"></div>
+          <div class="btnrow">
+            <button class="btn primary" id="ordCheck" type="button">检查 Check</button>
+            <button class="btn" id="ordReset" type="button">重新点 Start again</button>
+            <button class="btn teal" id="ordNew" type="button">换一组 New set</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC A3 : ROUNDING ================= -->
+      <section id="rounding">
+        <div class="sec-head">
+          <div class="sec-badge badge-a">A3</div>
+          <h2>四舍五入：找最近的「整数站」<span class="en">Rounding to 10, 100, 1,000, 10,000, 100,000</span></h2>
+        </div>
+        <p class="sec-sub">四舍五入（<span class="en-term">rounding</span>）就是把一个数改成离它最近的整十、整百、整千……考试里非常常见。</p>
+
+        <div class="card">
+          <h3><span class="step">LEARN 学一学</span>三步口诀 The Rounding Method</h3>
+          <div class="rule-box">
+            <p class="chant" style="margin:0 0 6px">“5 or more, raise the score; 4 or less, let it rest.”</p>
+            <p style="margin:0">① 找到要四舍五入的那一位（<span class="en-term">rounding digit</span>）；② 看它<b>右边</b>的邻居；③ 邻居是 5–9 → 进一位（round up）；邻居是 0–4 → 不变（round down），后面的位全部变成 0。</p>
+          </div>
+          <p><b>示范：45,500 四舍五入到最近的千位（to the nearest 1,000）</b> —— 这是考试最爱考的「刚好 5」陷阱题，一步一步看：</p>
+          <ol class="steps-list" id="demoSteps">
+            <li>要凑到最近的 1,000，所以盯住<b>千位</b>：45,<span class="digit-hl">5</span>00，千位是 5。</li>
+            <li>看千位<b>右边</b>的邻居 —— 百位：45,<span class="digit-hl">5</span><span class="digit-hl blue">5</span>00，邻居是 <b>5</b>。</li>
+            <li>口诀说：<b>5 or more, raise the score</b> —— 邻居是 5，要进位！千位 5 + 1 = 6。</li>
+            <li>千位后面的数字全部变 0：<b class="num" style="font-size:20px">45,500 → 46,000</b>。刚好一半时永远<b>向上</b>进位，这是规矩！</li>
+          </ol>
+          <div class="btnrow">
+            <button class="btn primary" id="demoNext" type="button">下一步 Next step →</button>
+            <button class="btn ghost" id="demoRestart" type="button">重看 Restart</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">PLAY 玩一玩</span>四舍五入实验室 Rounding Lab</h3>
+          <p>拖动滑杆换一个数，再选要凑到哪一位。看数轴：这个数离哪个「整数站」更近？</p>
+          <div class="big-display"><div class="big-num" id="labNum">0</div></div>
+          <input type="range" id="labSlider" min="0" max="999999" step="1" value="472351" aria-label="选择一个数" />
+          <p style="font-weight:800;margin:10px 0 4px">四舍五入到 Round to the nearest…</p>
+          <div class="target-btns" id="labTargets">
+            <button type="button" data-t="10">10</button>
+            <button type="button" data-t="100">100</button>
+            <button type="button" data-t="1000" class="on">1,000</button>
+            <button type="button" data-t="10000">10,000</button>
+            <button type="button" data-t="100000">100,000</button>
+          </div>
+          <div class="rnl">
+            <div class="rnl-track">
+              <div class="rnl-fill" id="labFill"></div>
+              <div class="rnl-mid" id="labMid"></div>
+              <div class="rnl-dot" id="labDot"></div>
+            </div>
+            <div class="rnl-labels">
+              <span class="lo" id="labLo"></span>
+              <span class="midlab" id="labMidLab"></span>
+              <span class="hi" id="labHi"></span>
+            </div>
+          </div>
+          <div class="rule-box" id="labResult" style="text-align:center;font-size:18px"></div>
+          <p class="zh-note" id="labWhy"></p>
+          <div class="btnrow">
+            <button class="btn" id="labRandom" type="button">🎲 随机一个数 Random</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC B1 : NEGATIVE NUMBERS ================= -->
+      <section id="neg">
+        <div class="sec-head">
+          <div class="sec-badge badge-b">B1</div>
+          <h2>负数：0 以下的世界<span class="en">Negative Numbers &amp; the Number Line</span></h2>
+        </div>
+        <p class="sec-sub">比 0 还小的数叫负数（<span class="en-term">negative numbers</span>），前面带一个减号。数轴上越往右越大，越往左越小 —— 所以 <b>−8 比 −3 还小</b>（更冷！），因为 −8 在更左边。</p>
+
+        <div class="card">
+          <h3><span class="step">PLAY 玩一玩</span>在数轴上散步 Walk the Number Line</h3>
+          <p>按按钮让小脚印走起来：往右走是变大（<span class="en-term">count forwards</span>），往左走是变小（<span class="en-term">count backwards</span>）。注意跨过 0 的时候会发生什么！</p>
+          <div class="nl-wrap">
+            <div class="nl-track"></div>
+            <div class="nl-marker" id="nlMarker"><div class="pin"><span id="nlPinVal">0</span></div></div>
+            <div class="nl-ticks" id="nlTicks"></div>
+          </div>
+          <div class="nl-pos" id="nlPos">现在在 0</div>
+          <div class="move-btns">
+            <button type="button" class="back" data-move="-5">−5</button>
+            <button type="button" class="back" data-move="-1">−1</button>
+            <button type="button" class="fwd" data-move="1">+1</button>
+            <button type="button" class="fwd" data-move="5">+5</button>
+          </div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn ghost" id="nlHome" type="button">回到 0 Back to zero</button>
+            <button class="btn sky" id="nlChallenge" type="button">🎯 挑战：走到目标数 Challenge me</button>
+          </div>
+          <div class="feedback" id="nlFb" style="text-align:center"></div>
+          <div class="rule-box">
+            <p style="margin:0"><b>数一数练习 Counting across zero：</b>从 −3 往前数 5 步：−3 → −2 → −1 → 0 → 1 → <b>2</b>。跨过 0 时不要停，0 也是一站！同理，从 4 往后数 7 步会到 −3。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TOPIC B2 : TEMPERATURE ================= -->
+      <section id="temp">
+        <div class="sec-head">
+          <div class="sec-badge badge-b">B2</div>
+          <h2>温度：升温、降温与温差<span class="en">Temperature — rises, falls &amp; differences</span></h2>
+        </div>
+        <p class="sec-sub">负数最常见的出场地点就是温度。气温可以到 0°C 以下；求两个温度差多少，就在数轴上<b>数格子</b>。</p>
+
+        <div class="card">
+          <h3><span class="step">PLAY 玩一玩</span>温度计 Thermometer</h3>
+          <div class="thermo-flex">
+            <div class="thermo" aria-hidden="true">
+              <div class="thermo-tube"><div class="thermo-fill" id="thFill"></div></div>
+              <div class="thermo-bulb" id="thBulb"></div>
+              <div class="thermo-scale" id="thScale"></div>
+            </div>
+            <div class="temp-side">
+              <div class="temp-read cold" id="thRead">−4°C</div>
+              <p style="text-align:center" class="zh-note">按按钮让气温上升（<span class="en-term">rises</span>）或下降（<span class="en-term">falls</span>），看看能不能穿过 0°C。</p>
+              <div class="move-btns">
+                <button type="button" class="back" data-temp="-5">❄ −5°</button>
+                <button type="button" class="back" data-temp="-1">❄ −1°</button>
+                <button type="button" class="fwd" data-temp="1">☀ +1°</button>
+                <button type="button" class="fwd" data-temp="5">☀ +5°</button>
+              </div>
+              <div class="btnrow" style="justify-content:center">
+                <button class="btn ghost" data-settemp="-12" type="button">冬夜 −12°C</button>
+                <button class="btn ghost" data-settemp="-4" type="button">清晨 −4°C</button>
+                <button class="btn ghost" data-settemp="18" type="button">午后 18°C</button>
+              </div>
+              <div class="feedback" id="thFb" style="text-align:center"></div>
+            </div>
+          </div>
+          <div class="rule-box">
+            <p style="margin:0"><b>例子 Example：</b>清晨 −4°C，白天上升了 7 度（rises by 7 degrees）：−4 → −3 → −2 → −1 → 0 → 1 → 2 → <b>3°C</b>。答案是 <b class="num">3°C</b>，不是 −11，也不是 11 哦。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="step">LEARN 学一学</span>温差怎么算？ Temperature Difference</h3>
+          <p>「温差」就是两个温度之间隔了多少度。方法：在数轴上从低的那个数<b>一格一格数</b>到高的那个数，数了几格就是差几度。</p>
+          <p><b>例子：−6°C 和 9°C 的温差。</b>从 −6 数到 0 是 6 格，从 0 数到 9 是 9 格，一共 6 + 9 = <b class="num">15</b>，所以温差是 <b class="num">15 degrees</b>。</p>
+          <p>选两个温度，按「数格子」，看小脚印一步一步数过去：</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px">
+            <label style="font-weight:800">温度 A
+              <select id="diffA" class="ans-input" style="width:130px;font-size:20px;margin-left:6px"></select>
+            </label>
+            <label style="font-weight:800">温度 B
+              <select id="diffB" class="ans-input" style="width:130px;font-size:20px;margin-left:6px"></select>
+            </label>
+          </div>
+          <div class="nl-wrap">
+            <div class="nl-track"></div>
+            <div class="nl-marker" id="diffMarker"><div class="pin"><span id="diffPinVal"></span></div></div>
+            <div class="nl-ticks" id="diffTicks"></div>
+          </div>
+          <div class="nl-pos" id="diffPos"></div>
+          <div class="btnrow">
+            <button class="btn sky" id="diffCount" type="button">👣 数格子 Count the jumps</button>
+            <button class="btn ghost" id="diffReset" type="button">重置 Reset</button>
+          </div>
+          <p class="zh-note">小窍门：两个都是负数时也一样数格子，比如 −11°C 到 −3°C：从 −11 数到 −3 是 8 格，温差 8 度。温差永远是正数（说「差多少度」不带负号）。</p>
+        </div>
+      </section>
+
+      <!-- ================= FINAL CHALLENGE ================= -->
+      <section id="quiz">
+        <div class="sec-head">
+          <div class="sec-badge badge-c">🏆</div>
+          <h2>期末挑战：考试风格练习<span class="en">Final Challenge — 20 exam-style questions</span></h2>
+        </div>
+        <p class="sec-sub">全部是 11+ 考试里会出现的题型。每答完一题都会讲方法。准备好了吗？</p>
+
+        <div class="card" id="quizCard">
+          <div class="score-line"><span id="qProgress">第 1 / 20 题</span><span id="qScore">⭐ 得分 Score: 0</span></div>
+          <div class="progress-outer"><div class="progress-inner" id="qBar"></div></div>
+          <div id="qBody" style="margin-top:16px"></div>
+          <div class="feedback" id="qFb"></div>
+          <div class="explain" id="qEx"></div>
+          <div class="btnrow">
+            <button class="btn primary" id="qNext" type="button" style="display:none">下一题 Next →</button>
+          </div>
+        </div>
+
+        <div class="card" id="resultCard" style="display:none">
+          <h3 style="text-align:center">🎉 挑战完成！Challenge Complete</h3>
+          <div class="stars" id="resStars"></div>
+          <p style="text-align:center;font-size:20px;font-weight:800" id="resLine"></p>
+          <p class="zh-note" style="text-align:center">每一项技能的掌握情况 —— 哪根条比较短，就回到上面对应的部分再玩一遍：</p>
+          <div id="resSkills"></div>
+          <div class="btnrow" style="justify-content:center">
+            <button class="btn primary" id="quizRestart" type="button">🔁 再挑战一次 Try again</button>
+          </div>
+        </div>
+      </section>
+
+      <footer>11+ Maths · Number &amp; Place Value（1/8 单元）· 做完这个单元，下一站是 Four Operations 四则运算。</footer>
+    </main>
+
+    <script>
+      "use strict";
+      var $ = function (id) { return document.getElementById(id); };
+      function fmt(n) { return n.toLocaleString("en-GB"); }
+      function fmtNeg(n) { return n < 0 ? "−" + Math.abs(n) : "" + n; }
+      function shuffle(a) {
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+      function randInt(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+      var PRAISE = ["太棒了！", "答对啦！", "真厉害！", "完全正确！", "好样的！"];
+      function praise() { return PRAISE[randInt(0, PRAISE.length - 1)]; }
+
+      /* ============ number to words (British English) ============ */
+      var ONES = ["zero","one","two","three","four","five","six","seven","eight","nine","ten",
+        "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+      var TENS = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+      function twoWords(n) {
+        if (n < 20) return ONES[n];
+        var t = Math.floor(n / 10), r = n % 10;
+        return TENS[t] + (r ? "-" + ONES[r] : "");
+      }
+      function threeWords(n) {
+        var h = Math.floor(n / 100), r = n % 100;
+        if (!h) return twoWords(r);
+        return ONES[h] + " hundred" + (r ? " and " + twoWords(r) : "");
+      }
+      function numberWords(n) {
+        if (n === 0) return "zero";
+        if (n === 1000000) return "one million";
+        var th = Math.floor(n / 1000), rest = n % 1000, parts = [];
+        if (th) parts.push(threeWords(th) + " thousand");
+        if (rest) parts.push(threeWords(rest));
+        if (parts.length === 2 && rest < 100) return parts[0] + " and " + parts[1];
+        return parts.join(", ");
+      }
+
+      /* ============ A1: place value builder ============ */
+      var PLACES = [
+        { en: "Millions", zh: "百万位", pow: 6, cls: "c0" },
+        { en: "Hundred Thousands", zh: "十万位", pow: 5, cls: "c1" },
+        { en: "Ten Thousands", zh: "万位", pow: 4, cls: "c2" },
+        { en: "Thousands", zh: "千位", pow: 3, cls: "c3" },
+        { en: "Hundreds", zh: "百位", pow: 2, cls: "c4" },
+        { en: "Tens", zh: "十位", pow: 1, cls: "c5" },
+        { en: "Ones", zh: "个位", pow: 0, cls: "c6" }
+      ];
+      var pvDigits = [0, 4, 7, 2, 3, 5, 1];
+      var pvSel = 2;
+      function pvValue() {
+        var v = 0;
+        for (var i = 0; i < 7; i++) v += pvDigits[i] * Math.pow(10, PLACES[i].pow);
+        return v;
+      }
+      function renderPV() {
+        var chart = $("pvChart");
+        chart.innerHTML = "";
+        PLACES.forEach(function (p, i) {
+          var col = document.createElement("div");
+          col.className = "pv-col" + (i === pvSel ? " sel" : "");
+          var val = pvDigits[i] * Math.pow(10, p.pow);
+          col.innerHTML =
+            '<div class="pv-head ' + p.cls + '">' + fmt(Math.pow(10, p.pow)) +
+            '<span class="en2">' + p.zh + "<br>" + p.en + "</span></div>" +
+            '<div class="pv-digit" role="button" aria-label="选择' + p.zh + '">' + pvDigits[i] + "</div>" +
+            '<div class="pv-stepper"><button type="button" data-i="' + i + '" data-d="-1" aria-label="减少">−</button>' +
+            '<button type="button" data-i="' + i + '" data-d="1" aria-label="增加">+</button></div>' +
+            '<div class="pv-val">' + pvDigits[i] + " × " + fmt(Math.pow(10, p.pow)) + "<br>= " + fmt(val) + "</div>";
+          col.querySelector(".pv-digit").addEventListener("click", function () {
+            pvSel = i; renderPV();
+          });
+          col.querySelectorAll(".pv-stepper button").forEach(function (b) {
+            b.addEventListener("click", function () {
+              var idx = +b.getAttribute("data-i"), d = +b.getAttribute("data-d");
+              pvDigits[idx] = (pvDigits[idx] + d + 10) % 10;
+              pvSel = idx; renderPV();
+            });
+          });
+          chart.appendChild(col);
+        });
+        var num = pvValue();
+        $("pvNumber").textContent = fmt(num);
+        $("pvWords").textContent = numberWords(num);
+        var p = PLACES[pvSel], d = pvDigits[pvSel], val = d * Math.pow(10, p.pow);
+        $("pvFact").innerHTML =
+          "在 <span class='hl'>" + fmt(num) + "</span> 里，" + p.zh + "上的 <span class='hl'>" + d +
+          "</span> 表示 <span class='hl'>" + fmt(val) + "</span><br><span style='font-size:15px;color:var(--muted)'>In " +
+          fmt(num) + ", the digit " + d + " is in the " + p.en.toLowerCase() + " place, so it is worth " + fmt(val) + ".</span>";
+      }
+      $("pvRandom").addEventListener("click", function () {
+        var n = randInt(10000, 999999), s = String(n);
+        while (s.length < 7) s = "0" + s;
+        pvDigits = s.split("").map(Number);
+        pvSel = randInt(1, 6);
+        renderPV();
+      });
+      $("pvReset").addEventListener("click", function () {
+        pvDigits = [0, 4, 7, 2, 3, 5, 1]; pvSel = 2; renderPV();
+      });
+      $("pvSpeak").addEventListener("click", function () {
+        try {
+          var u = new SpeechSynthesisUtterance(numberWords(pvValue()));
+          u.lang = "en-GB"; u.rate = 0.85;
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(u);
+        } catch (e) { /* speech not available */ }
+      });
+      renderPV();
+
+      /* ============ A1 try: digit value quiz ============ */
+      function highlightDigit(num, pow) {
+        var s = String(num), fromLeft = s.length - 1 - pow, out = "", count = 0;
+        for (var i = s.length - 1; i >= 0; i--) {
+          var ch = s[i];
+          if (i === fromLeft) ch = '<span style="color:var(--coral);font-size:1.3em;text-decoration:underline">' + ch + "</span>";
+          out = ch + out;
+          count++;
+          if (count % 3 === 0 && i > 0) out = "," + out;
+        }
+        return out;
+      }
+      var dvAnswer = 0;
+      function genDV() {
+        var num, pow, digit, tries = 0;
+        do {
+          num = randInt(10000, 999999);
+          pow = randInt(1, 5);
+          digit = Math.floor(num / Math.pow(10, pow)) % 10;
+          tries++;
+        } while (digit === 0 && tries < 20);
+        dvAnswer = digit * Math.pow(10, pow);
+        var place = PLACES.filter(function (p) { return p.pow === pow; })[0];
+        $("dvQ").innerHTML = "What is the value of the digit " + digit + " in " + highlightDigit(num, pow) + "?";
+        $("dvQZh").textContent = "在 " + fmt(num) + " 里，标红的数字 " + digit + " 代表多少？";
+        var placeVal = Math.pow(10, pow);
+        var cand = [dvAnswer, dvAnswer * 10, digit, dvAnswer + placeVal];
+        if (pow >= 2) cand.push(dvAnswer / 10);
+        cand.push(dvAnswer + digit);
+        var list = [];
+        cand.forEach(function (x) { if (list.indexOf(x) < 0 && x >= 0) list.push(x); });
+        list = list.slice(0, 4);
+        while (list.length < 4) { var extra = dvAnswer + placeVal * (list.length + 2); if (list.indexOf(extra) < 0) list.push(extra); else break; }
+        shuffle(list);
+        var box = $("dvChoices"); box.innerHTML = "";
+        list.forEach(function (v) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "choice"; b.textContent = fmt(v);
+          b.addEventListener("click", function () {
+            box.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+            var ex = $("dvEx");
+            if (v === dvAnswer) {
+              b.classList.add("right");
+              $("dvFb").textContent = praise() + " Correct!";
+              $("dvFb").className = "feedback good";
+              ex.innerHTML = "数字 " + digit + " 站在<b>" + place.zh + "</b>（" + place.en.toLowerCase() +
+                "），所以它的值是 " + digit + " × " + fmt(Math.pow(10, pow)) + " = <b>" + fmt(dvAnswer) + "</b>。";
+            } else {
+              b.classList.add("wrong");
+              box.querySelectorAll("button").forEach(function (x) { if (+x.textContent.replace(/,/g, "") === dvAnswer) x.classList.add("right"); });
+              $("dvFb").textContent = "再想想 —— 答案是 " + fmt(dvAnswer);
+              $("dvFb").className = "feedback bad";
+              ex.innerHTML = "先看这个数字站在哪一位：它在<b>" + place.zh + "</b>（" + place.en.toLowerCase() +
+                "），值 = " + digit + " × " + fmt(Math.pow(10, pow)) + " = <b>" + fmt(dvAnswer) + "</b>。记住：看数字本身，更要看它的位置！";
+            }
+            ex.classList.add("show");
+          });
+          box.appendChild(b);
+        });
+        $("dvFb").textContent = ""; $("dvFb").className = "feedback";
+        $("dvEx").classList.remove("show");
+      }
+      $("dvNext").addEventListener("click", genDV);
+      genDV();
+
+      /* ============ A2: compare signs ============ */
+      var cmpCorrect = "=";
+      function firstDiffExplain(a, b) {
+        var sa = String(a), sb = String(b);
+        var len = Math.max(sa.length, sb.length);
+        while (sa.length < len) sa = "0" + sa;
+        while (sb.length < len) sb = "0" + sb;
+        for (var i = 0; i < len; i++) {
+          if (sa[i] !== sb[i]) {
+            var pow = len - 1 - i;
+            var place = PLACES.filter(function (p) { return p.pow === pow; })[0];
+            return { pow: pow, place: place, da: sa[i], db: sb[i] };
+          }
+        }
+        return null;
+      }
+      function genCmp() {
+        var a = randInt(1000, 999999), b;
+        var r = Math.random();
+        if (r < 0.15) { b = a; }
+        else if (r < 0.6) {
+          var pow = randInt(0, 4);
+          b = a + randInt(1, 9) * Math.pow(10, pow) * (Math.random() < 0.5 ? 1 : -1);
+          if (b <= 0 || b > 999999) b = a + Math.pow(10, pow);
+        } else { b = randInt(1000, 999999); }
+        cmpCorrect = a > b ? ">" : (a < b ? "<" : "=");
+        $("cmpA").textContent = fmt(a);
+        $("cmpB").textContent = fmt(b);
+        $("cmpMid").textContent = "?";
+        $("cmpFb").textContent = ""; $("cmpFb").className = "feedback";
+        $("cmpEx").classList.remove("show");
+        $("cmpSigns").querySelectorAll("button").forEach(function (btn) {
+          btn.classList.remove("right", "wrong"); btn.disabled = false;
+        });
+        $("cmpEx").dataset.a = a; $("cmpEx").dataset.b = b;
+      }
+      $("cmpSigns").querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var sign = btn.getAttribute("data-sign");
+          var a = +$("cmpEx").dataset.a, b = +$("cmpEx").dataset.b;
+          $("cmpSigns").querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+          $("cmpMid").textContent = cmpCorrect;
+          var ex = $("cmpEx"), d = firstDiffExplain(a, b);
+          if (sign === cmpCorrect) {
+            btn.classList.add("right");
+            $("cmpFb").textContent = praise() + " Correct!";
+            $("cmpFb").className = "feedback good";
+          } else {
+            btn.classList.add("wrong");
+            $("cmpSigns").querySelectorAll("button").forEach(function (x) {
+              if (x.getAttribute("data-sign") === cmpCorrect) x.classList.add("right");
+            });
+            $("cmpFb").textContent = "正确答案是 " + cmpCorrect + " ，看下面的方法 ↓";
+            $("cmpFb").className = "feedback bad";
+          }
+          if (!d) {
+            ex.innerHTML = fmt(a) + " 和 " + fmt(b) + " 每一位都完全一样，所以它们<b>相等</b>（equal）。";
+          } else {
+            ex.innerHTML = "从左往右一位一位比：前面的位都一样，比到<b>" + d.place.zh + "</b>（" +
+              d.place.en.toLowerCase() + "）时，左边是 " + d.da + "，右边是 " + d.db + "。" +
+              (cmpCorrect === ">" ? "左边的数先变大，所以 <b>" + fmt(a) + " &gt; " + fmt(b) + "</b>，后面的位不用看了！" :
+               "右边的数先变大，所以 <b>" + fmt(a) + " &lt; " + fmt(b) + "</b>，后面的位不用看了！");
+          }
+          ex.classList.add("show");
+        });
+      });
+      $("cmpNext").addEventListener("click", genCmp);
+      genCmp();
+
+      /* ============ A2: ordering game ============ */
+      var ordValues = [], ordPicked = [];
+      function genOrd() {
+        var len = Math.random() < 0.5 ? 5 : 6;
+        var prefix = randInt(10, 98);
+        var restLen = len - 2, maxRest = Math.pow(10, restLen);
+        var set = {};
+        while (Object.keys(set).length < 5) {
+          var n = prefix * maxRest + randInt(0, maxRest - 1);
+          set[n] = true;
+        }
+        ordValues = Object.keys(set).map(Number);
+        ordPicked = [];
+        renderOrd();
+        $("ordFb").textContent = ""; $("ordFb").className = "feedback";
+        $("ordEx").classList.remove("show");
+      }
+      function renderOrd() {
+        var pool = $("ordPool"); pool.innerHTML = "";
+        var display = ordValues.slice();
+        if (!renderOrd.order) renderOrd.order = shuffle(display.slice());
+        renderOrd.order.forEach(function (v) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "order-chip"; b.dataset.v = v;
+          var rank = ordPicked.indexOf(v);
+          if (rank >= 0) { b.classList.add("picked"); }
+          b.innerHTML = '<span class="rank">' + (rank >= 0 ? rank + 1 : "") + "</span>" + fmt(v);
+          b.addEventListener("click", function () {
+            var i = ordPicked.indexOf(v);
+            if (i >= 0) ordPicked.splice(i, 1); else if (ordPicked.length < 5) ordPicked.push(v);
+            renderOrd();
+          });
+          pool.appendChild(b);
+        });
+      }
+      $("ordNew").addEventListener("click", function () { renderOrd.order = null; genOrd(); });
+      $("ordReset").addEventListener("click", function () {
+        ordPicked = []; renderOrd();
+        $("ordFb").textContent = ""; $("ordEx").classList.remove("show");
+      });
+      $("ordCheck").addEventListener("click", function () {
+        if (ordPicked.length < 5) {
+          $("ordFb").textContent = "先把 5 个数都点完哦（已点 " + ordPicked.length + " / 5）";
+          $("ordFb").className = "feedback bad";
+          return;
+        }
+        var sorted = ordValues.slice().sort(function (x, y) { return x - y; });
+        var okCount = 0;
+        document.querySelectorAll("#ordPool .order-chip").forEach(function (chip) {
+          var v = +chip.dataset.v, rank = ordPicked.indexOf(v);
+          chip.classList.remove("right", "wrong");
+          if (sorted[rank] === v) { chip.classList.add("right"); okCount++; }
+          else chip.classList.add("wrong");
+        });
+        var ex = $("ordEx");
+        if (okCount === 5) {
+          $("ordFb").textContent = praise() + " 全部排对了！Perfect order!";
+          $("ordFb").className = "feedback good";
+        } else {
+          $("ordFb").textContent = "有 " + (5 - okCount) + " 个位置不对，再看看下面的正确顺序 ↓";
+          $("ordFb").className = "feedback bad";
+        }
+        ex.innerHTML = "正确顺序（smallest → largest）：<b>" + sorted.map(fmt).join(" &lt; ") +
+          "</b>。方法：先比最高位，再一位一位往右比，诀窍和比大小一样。";
+        ex.classList.add("show");
+      });
+      genOrd();
+
+      /* ============ A3: rounding demo steps ============ */
+      var demoIdx = 0;
+      var demoLis = $("demoSteps").querySelectorAll("li");
+      function renderDemo() {
+        demoLis.forEach(function (li, i) { li.classList.toggle("on", i < demoIdx); });
+        $("demoNext").disabled = demoIdx >= demoLis.length;
+        $("demoNext").textContent = demoIdx >= demoLis.length ? "✔ 示范完成 Well done!" : "下一步 Next step →";
+      }
+      $("demoNext").addEventListener("click", function () { if (demoIdx < demoLis.length) { demoIdx++; renderDemo(); } });
+      $("demoRestart").addEventListener("click", function () { demoIdx = 0; renderDemo(); });
+      renderDemo();
+
+      /* ============ A3: rounding lab ============ */
+      var labTarget = 1000;
+      function labUpdate() {
+        var v = +$("labSlider").value, t = labTarget;
+        $("labNum").textContent = fmt(v);
+        var lo = Math.floor(v / t) * t, hi = lo + t;
+        var exact = v % t === 0;
+        if (exact) hi = lo;
+        var pct = exact ? 0 : ((v - lo) / t) * 100;
+        $("labDot").style.left = pct + "%";
+        $("labFill").style.width = pct + "%";
+        $("labMid").style.left = "50%";
+        $("labLo").textContent = fmt(lo);
+        $("labHi").textContent = fmt(hi);
+        var midLab = $("labMidLab");
+        midLab.textContent = exact ? "" : "正中间 " + fmt(lo + t / 2);
+        midLab.style.left = "50%"; midLab.style.transform = "translateX(-50%)";
+        var nd = Math.floor(v / (t / 10)) % 10;
+        var result = exact ? v : (nd >= 5 ? hi : lo);
+        $("labResult").innerHTML = fmt(v) + " rounded to the nearest " + fmt(t) + " is <b style='font-size:1.25em'>" + fmt(result) + "</b><br><span style='font-size:15px'>" +
+          fmt(v) + " 四舍五入到最近的 " + fmt(t) + " 是 " + fmt(result) + "</span>";
+        var why;
+        if (exact) why = "这个数正好就是 " + fmt(t) + " 的倍数，稳稳停在「整数站」上，不用动。";
+        else if (nd >= 5) why = "方法：看 " + fmt(t) + " 右边的邻居是 " + nd + "（≥ 5），口诀 “5 or more, raise the score” → 向上进位到 " + fmt(hi) + "。" +
+          (nd === 5 && v - lo === t / 2 ? "注意：它正好在正中间，规矩是永远向上进位！" : "它离 " + fmt(hi) + " 距离 " + fmt(hi - v) + "，离 " + fmt(lo) + " 距离 " + fmt(v - lo) + "，确实更近。");
+        else why = "方法：看 " + fmt(t) + " 右边的邻居是 " + nd + "（≤ 4），口诀 “4 or less, let it rest” → 保持不变，落到 " + fmt(lo) + "。它离 " + fmt(lo) + " 距离 " + fmt(v - lo) + "，离 " + fmt(hi) + " 距离 " + fmt(hi - v) + "，确实更近。";
+        $("labWhy").textContent = why;
+      }
+      $("labSlider").addEventListener("input", labUpdate);
+      $("labTargets").querySelectorAll("button").forEach(function (b) {
+        b.addEventListener("click", function () {
+          labTarget = +b.getAttribute("data-t");
+          $("labTargets").querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+          labUpdate();
+        });
+      });
+      $("labRandom").addEventListener("click", function () {
+        $("labSlider").value = randInt(1000, 999999);
+        labUpdate();
+      });
+      labUpdate();
+
+      /* ============ number line builder ============ */
+      function buildTicks(el) {
+        el.innerHTML = "";
+        for (var v = -20; v <= 20; v++) {
+          var t = document.createElement("div");
+          t.className = "nl-tick";
+          t.style.left = ((v + 20) / 40 * 100) + "%";
+          t.textContent = v % 5 === 0 ? fmtNeg(v) : "";
+          el.appendChild(t);
+        }
+      }
+      function nlLeft(v) { return ((v + 20) / 40 * 100) + "%"; }
+      buildTicks($("nlTicks"));
+      buildTicks($("diffTicks"));
+
+      /* ============ B1: number line walk ============ */
+      var nlVal = 0, nlTarget = null;
+      function renderNL() {
+        $("nlMarker").style.left = nlLeft(nlVal);
+        $("nlPinVal").textContent = fmtNeg(nlVal);
+        $("nlPos").innerHTML = "现在在 <b>" + fmtNeg(nlVal) + "</b> <span style='font-size:17px;color:var(--muted)'>You are at " + fmtNeg(nlVal) + "</span>";
+      }
+      document.querySelectorAll("[data-move]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var d = +b.getAttribute("data-move");
+          nlVal = Math.max(-20, Math.min(20, nlVal + d));
+          renderNL();
+          if (nlTarget !== null) {
+            if (nlVal === nlTarget) {
+              $("nlFb").textContent = praise() + " 你走到了 " + fmtNeg(nlTarget) + "！🎉";
+              $("nlFb").className = "feedback good";
+              nlTarget = null;
+            } else {
+              $("nlFb").textContent = "目标是 " + fmtNeg(nlTarget) + "，还差 " + Math.abs(nlTarget - nlVal) + " 步" + (nlTarget > nlVal ? "，往右走 →" : "，往左走 ←");
+              $("nlFb").className = "feedback";
+            }
+          }
+        });
+      });
+      $("nlHome").addEventListener("click", function () { nlVal = 0; nlTarget = null; renderNL(); $("nlFb").textContent = ""; });
+      $("nlChallenge").addEventListener("click", function () {
+        do { nlTarget = randInt(-18, 18); } while (nlTarget === nlVal);
+        $("nlFb").textContent = "🎯 挑战：走到 " + fmtNeg(nlTarget) + "！Walk to " + fmtNeg(nlTarget);
+        $("nlFb").className = "feedback";
+      });
+      renderNL();
+
+      /* ============ B2: thermometer ============ */
+      var thVal = -4;
+      var thScale = $("thScale");
+      [30, 20, 10, 0, -10, -20].forEach(function (v) {
+        var s = document.createElement("span");
+        s.style.bottom = ((v + 20) / 50 * 100) + "%";
+        s.textContent = fmtNeg(v) + "°";
+        thScale.appendChild(s);
+      });
+      function renderTh() {
+        var pct = (thVal + 20) / 50 * 100;
+        var color = thVal < 0 ? "var(--sky)" : (thVal < 10 ? "#E8893B" : "var(--coral)");
+        $("thFill").style.height = pct + "%";
+        $("thFill").style.background = color;
+        $("thBulb").style.background = color;
+        var read = $("thRead");
+        read.textContent = fmtNeg(thVal) + "°C";
+        read.className = "temp-read " + (thVal < 0 ? "cold" : "warm");
+      }
+      function thSentence(oldV, newV) {
+        var d = newV - oldV;
+        if (d === 0) return "";
+        var en = "It was " + fmtNeg(oldV) + "°C. It " + (d > 0 ? "rises" : "falls") + " by " + Math.abs(d) + " degrees to " + fmtNeg(newV) + "°C.";
+        var zh = "气温从 " + fmtNeg(oldV) + "°C " + (d > 0 ? "上升" : "下降") + "了 " + Math.abs(d) + " 度，现在是 " + fmtNeg(newV) + "°C。";
+        return zh + " " + en;
+      }
+      document.querySelectorAll("[data-temp]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var old = thVal;
+          thVal = Math.max(-20, Math.min(30, thVal + (+b.getAttribute("data-temp"))));
+          renderTh();
+          $("thFb").textContent = thSentence(old, thVal);
+          $("thFb").className = "feedback";
+        });
+      });
+      document.querySelectorAll("[data-settemp]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var old = thVal;
+          thVal = +b.getAttribute("data-settemp");
+          renderTh();
+          $("thFb").textContent = thSentence(old, thVal);
+          $("thFb").className = "feedback";
+        });
+      });
+      renderTh();
+
+      /* ============ B2: temperature difference counter ============ */
+      var diffTimer = null;
+      function fillDiffSelects() {
+        ["diffA", "diffB"].forEach(function (id) {
+          var sel = $(id);
+          for (var v = -20; v <= 20; v++) {
+            var o = document.createElement("option");
+            o.value = v; o.textContent = fmtNeg(v) + "°C";
+            sel.appendChild(o);
+          }
+        });
+        $("diffA").value = -6;
+        $("diffB").value = 9;
+      }
+      fillDiffSelects();
+      function diffSummary() {
+        var a = +$("diffA").value, b = +$("diffB").value;
+        $("diffPos").innerHTML = "A = <b>" + fmtNeg(a) + "°C</b>，B = <b>" + fmtNeg(b) + "°C</b> —— 按「数格子」看看温差是多少";
+        $("diffMarker").style.display = "none";
+      }
+      $("diffA").addEventListener("change", diffSummary);
+      $("diffB").addEventListener("change", diffSummary);
+      $("diffReset").addEventListener("click", function () {
+        if (diffTimer) { clearInterval(diffTimer); diffTimer = null; }
+        $("diffCount").disabled = false;
+        diffSummary();
+      });
+      $("diffCount").addEventListener("click", function () {
+        if (diffTimer) return;
+        var a = +$("diffA").value, b = +$("diffB").value;
+        var lo = Math.min(a, b), hi = Math.max(a, b), total = hi - lo;
+        var marker = $("diffMarker");
+        marker.style.display = "block";
+        var cur = lo, count = 0;
+        marker.style.left = nlLeft(cur);
+        $("diffPinVal").textContent = fmtNeg(cur);
+        $("diffCount").disabled = true;
+        if (total === 0) {
+          $("diffPos").innerHTML = "两个温度一样，温差是 <b>0 degrees</b>。";
+          $("diffCount").disabled = false;
+          return;
+        }
+        $("diffPos").innerHTML = "从 " + fmtNeg(lo) + "°C 出发，往右数……";
+        diffTimer = setInterval(function () {
+          cur++; count++;
+          marker.style.left = nlLeft(cur);
+          $("diffPinVal").textContent = fmtNeg(cur);
+          $("diffPos").innerHTML = "数了 <b>" + count + "</b> 格 · " + count + (count === 1 ? " jump" : " jumps");
+          if (cur >= hi) {
+            clearInterval(diffTimer); diffTimer = null;
+            $("diffCount").disabled = false;
+            var crossZero = lo < 0 && hi > 0 ?
+              "小窍门：从 " + fmtNeg(lo) + " 数到 0 是 " + Math.abs(lo) + " 格，从 0 数到 " + hi + " 是 " + hi + " 格，" + Math.abs(lo) + " + " + hi + " = " + total + "。" : "";
+            $("diffPos").innerHTML = "🎉 数完了！从 " + fmtNeg(lo) + "°C 到 " + fmtNeg(hi) + "°C 一共 <b>" + total +
+              " 格</b>，所以温差是 <b>" + total + " degrees</b>。" + crossZero;
+          }
+        }, 380);
+      });
+      diffSummary();
+
+      /* ============ FINAL QUIZ ============ */
+      var SKILL_NAMES = {
+        pv: "数位 Place Value",
+        cmp: "比较大小 Comparing",
+        round: "四舍五入 Rounding",
+        neg: "负数 Negative Numbers",
+        temp: "温差 Temperature"
+      };
+      var QUESTIONS = [
+        { skill: "pv", type: "mc", q: "What is the value of the digit 6 in 362,480?", zh: "在 362,480 里，数字 6 代表多少？",
+          options: ["6,000", "60,000", "600,000", "60"], answer: "60,000",
+          explain: "从左往右数 362,480 的数位：十万位是 3，<b>万位是 6</b>。所以 6 在万位（ten thousands），值 = 6 × 10,000 = <b>60,000</b>。" },
+        { skill: "pv", type: "input", q: "What number is 300,000 + 40,000 + 5,000 + 200 + 60 + 3?", zh: "把这些数位值加起来，是哪个数？",
+          answer: 345263, placeholder: "输入数字",
+          explain: "按数位对齐相加：300,000 + 40,000 = 340,000；+ 5,000 = 345,000；+ 200 + 60 + 3 = <b>345,263</b>。" },
+        { skill: "pv", type: "mc", q: "Which of these numbers is the largest?", zh: "下面哪个数最大？",
+          options: ["409,999", "490,909", "409,099", "490,099"], answer: "490,909",
+          explain: "先比十万位：两个 49 开头的比两个 40 开头的<b>大</b>。再比 490,909 和 490,099：千位都一样，比到百位 9 &gt; 0，所以 <b>490,909</b> 最大。" },
+        { skill: "pv", type: "mc", q: "Which number is “five hundred and six thousand and forty”?", zh: "英文 “five hundred and six thousand and forty” 写成数字是哪个？",
+          options: ["506,040", "560,040", "506,400", "500,640"], answer: "506,040",
+          explain: "“five hundred and six thousand” = 506,000；“forty” = 40，加起来 <b>506,040</b>。注意百位没有数字，要写 0 占位！" },
+        { skill: "cmp", type: "sign", a: 78405, b: 78450, q: "Choose the correct sign: 78,405 ? 78,450", zh: "选正确的符号。",
+          answer: "<",
+          explain: "从左往右比：十万位、万位、千位、百位都一样；比到<b>十位</b>：0 &lt; 5，所以 <b>78,405 &lt; 78,450</b>。" },
+        { skill: "cmp", type: "order", q: "Order these numbers from smallest to largest.", zh: "把这些数从小到大排列（依次点击）。",
+          values: [12305, 12035, 12350, 12053],
+          explain: "四个数都是一万二千多：先比百位，12035 和 12053 的百位是 0，比 12305、12350 小；12035 和 12053 再比十位：3 &lt; 5。正确顺序：<b>12,035 &lt; 12,053 &lt; 12,305 &lt; 12,350</b>。" },
+        { skill: "cmp", type: "mc", q: "Which of these numbers is the smallest?", zh: "下面哪个数最小？",
+          options: ["899,999", "900,001", "899,909", "909,000"], answer: "899,909",
+          explain: "先比十万位：899 开头的两个比 900、909 开头的小。再比 899,999 和 899,909：比到<b>十位</b>，0 &lt; 9，所以 <b>899,909</b> 最小。" },
+        { skill: "round", type: "input", q: "Round 4,682 to the nearest 100.", zh: "把 4,682 四舍五入到最近的百位。",
+          answer: 4700, placeholder: "输入数字",
+          explain: "盯住百位 6，看右边的邻居十位是 8（≥ 5，进位）：6 + 1 = 7，后面变 0 → <b>4,700</b>。" },
+        { skill: "round", type: "input", q: "Round 45,500 to the nearest 1,000.", zh: "把 45,500 四舍五入到最近的千位。（小心，这是陷阱题！）",
+          answer: 46000, placeholder: "输入数字",
+          explain: "千位是 5，看邻居百位也是 <b>5</b>。刚好一半时规矩是<b>向上进位</b>：“5 or more, raise the score” → <b>46,000</b>。" },
+        { skill: "round", type: "mc", q: "Round 236,499 to the nearest 10,000.", zh: "把 236,499 四舍五入到最近的万位。",
+          options: ["230,000", "240,000", "236,000", "200,000"], answer: "240,000",
+          explain: "盯住万位 3，看邻居千位是 6（≥ 5，进位）：万位 3 + 1 = 4，后面全变 0 → <b>240,000</b>。" },
+        { skill: "round", type: "input", q: "Round 9,850 to the nearest 100.", zh: "把 9,850 四舍五入到最近的百位。",
+          answer: 9900, placeholder: "输入数字",
+          explain: "百位是 8，看邻居十位是 <b>5</b> → 进位：8 + 1 = 9 → <b>9,900</b>。" },
+        { skill: "round", type: "input", q: "Round 999,500 to the nearest 1,000.", zh: "把 999,500 四舍五入到最近的千位。",
+          answer: 1000000, placeholder: "输入数字",
+          explain: "邻居百位是 5 → 进位。千位 9 + 1 满十，一路进位上去，最后变成 <b>1,000,000</b> —— 一百万！进位像多米诺骨牌一样传上去。" },
+        { skill: "neg", type: "order", q: "Order these numbers from smallest to largest.", zh: "把这些数从小到大排列（依次点击）。记住：负数越「负」越小。",
+          values: [-8, -3, -11, 0],
+          explain: "在数轴上越往左越小：−11 在最左边，然后是 −8、−3，最后是 0。正确顺序：<b>−11 &lt; −8 &lt; −3 &lt; 0</b>。" },
+        { skill: "neg", type: "input", q: "Start at −6. Count forwards 9. Where do you land?", zh: "从 −6 出发，向前（往右）数 9 步，停在哪里？",
+          answer: 3, placeholder: "输入数字",
+          explain: "从 −6 数到 0 用 6 步，还剩 3 步：0 → 1 → 2 → <b>3</b>。跨过 0 时别忘了 0 也是一站。" },
+        { skill: "neg", type: "mc", q: "Which temperature is colder?", zh: "哪个温度更冷？",
+          options: ["−12°C", "−7°C"], answer: "−12°C",
+          explain: "越冷 = 数越小 = 在数轴上越靠左。−12 在 −7 的左边，所以 <b>−12°C 更冷</b>。" },
+        { skill: "neg", type: "input", q: "The temperature is −4°C. It rises by 7 degrees. What is the temperature now?", zh: "气温是 −4°C，上升了 7 度，现在是多少度？",
+          answer: 3, placeholder: "输入数字", unit: "°C",
+          explain: "在数轴上从 −4 往右走 7 步：−4 → −3 → −2 → −1 → 0 → 1 → 2 → <b>3°C</b>。" },
+        { skill: "temp", type: "input", q: "What is the difference in temperature between −6°C and 9°C?", zh: "−6°C 和 9°C 的温差是多少度？",
+          answer: 15, placeholder: "输入数字", unit: "degrees",
+          explain: "数格子：从 −6 到 0 是 6 格，从 0 到 9 是 9 格，6 + 9 = <b>15 degrees</b>。" },
+        { skill: "temp", type: "input", q: "What is the difference in temperature between −11°C and −3°C?", zh: "−11°C 和 −3°C 的温差是多少度？",
+          answer: 8, placeholder: "输入数字", unit: "degrees",
+          explain: "两个都是负数，照样数格子：从 −11 一格一格数到 −3，一共 <b>8 格</b>，温差 8 degrees。" },
+        { skill: "temp", type: "input", q: "The temperature is 4°C. It falls by 9 degrees overnight. What is the temperature in the morning?", zh: "气温 4°C，夜里下降了 9 度，早上是多少度？",
+          answer: -5, placeholder: "输入数字", unit: "°C",
+          explain: "从 4 往左走 9 步：4 → 0 用 4 步，再走 5 步到 <b>−5°C</b>。" },
+        { skill: "temp", type: "mc", q: "At 6am it is −5°C. By noon it is 8°C. How many degrees warmer is it at noon?", zh: "早上 6 点 −5°C，中午 8°C。中午比早上暖和多少度？",
+          options: ["3 degrees", "13 degrees", "12 degrees", "8 degrees"], answer: "13 degrees",
+          explain: "求温差就是数格子：从 −5 到 0 是 5 格，0 到 8 是 8 格，5 + 8 = <b>13 degrees</b>。小心别答成 3（那是 8 − 5，跨过 0 时不能这样算）。" }
+      ];
+      var qIdx = 0, qScore = 0, qAnswered = false;
+      var qStats = {};
+      function resetStats() {
+        qStats = {};
+        Object.keys(SKILL_NAMES).forEach(function (k) { qStats[k] = { c: 0, t: 0 }; });
+      }
+      resetStats();
+
+      function markAnswered(correct, q) {
+        if (qAnswered) return;
+        qAnswered = true;
+        qStats[q.skill].t++;
+        if (correct) { qScore++; qStats[q.skill].c++; }
+        $("qScore").textContent = "⭐ 得分 Score: " + qScore;
+        var nb = $("qNext");
+        nb.style.display = "inline-flex";
+        nb.textContent = qIdx >= QUESTIONS.length - 1 ? "看结果 See my results 🏆" : "下一题 Next →";
+      }
+      function showExplain(q, correct) {
+        var fb = $("qFb");
+        fb.textContent = correct ? praise() + " Correct! 答对了！" : "不对哦，看看下面的方法 ↓ Not quite — check the method:";
+        fb.className = "feedback " + (correct ? "good" : "bad");
+        var ex = $("qEx");
+        ex.innerHTML = q.explain;
+        ex.classList.add("show");
+      }
+      function renderQuestion() {
+        var q = QUESTIONS[qIdx];
+        qAnswered = false;
+        $("qNext").style.display = "none";
+        $("qFb").textContent = ""; $("qFb").className = "feedback";
+        $("qEx").classList.remove("show");
+        $("qProgress").textContent = "第 " + (qIdx + 1) + " / " + QUESTIONS.length + " 题 · " + SKILL_NAMES[q.skill];
+        $("qBar").style.width = (qIdx / QUESTIONS.length * 100) + "%";
+        var body = $("qBody");
+        var head = '<p class="q-text"><span class="qnum">Q' + (qIdx + 1) + "</span>" + q.q + "</p>" +
+          '<p class="q-zh">' + q.zh + "</p>";
+        if (q.type === "mc") {
+          body.innerHTML = head + '<div class="choices"></div>';
+          var box = body.querySelector(".choices");
+          shuffle(q.options.slice()).forEach(function (opt) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "choice"; b.textContent = opt;
+            b.addEventListener("click", function () {
+              var correct = opt === q.answer;
+              box.querySelectorAll("button").forEach(function (x) {
+                x.disabled = true;
+                if (x.textContent === q.answer) x.classList.add("right");
+              });
+              if (!correct) b.classList.add("wrong");
+              showExplain(q, correct);
+              markAnswered(correct, q);
+            });
+            box.appendChild(b);
+          });
+        } else if (q.type === "sign") {
+          body.innerHTML = head +
+            '<div class="vs-row"><span>' + fmt(q.a) + '</span><span class="mid" data-mid>?</span><span>' + fmt(q.b) + "</span></div>" +
+            '<div class="sign-btns">' +
+            '<button type="button" data-s=">">&gt;</button><button type="button" data-s="=">=</button><button type="button" data-s="<">&lt;</button></div>';
+          body.querySelectorAll("[data-s]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var correct = btn.getAttribute("data-s") === q.answer;
+              body.querySelectorAll("[data-s]").forEach(function (x) {
+                x.disabled = true;
+                if (x.getAttribute("data-s") === q.answer) x.classList.add("right");
+              });
+              if (!correct) btn.classList.add("wrong");
+              body.querySelector("[data-mid]").textContent = q.answer;
+              showExplain(q, correct);
+              markAnswered(correct, q);
+            });
+          });
+        } else if (q.type === "input") {
+          body.innerHTML = head +
+            '<div class="ans-row"><input class="ans-input" type="text" inputmode="numeric" autocomplete="off" placeholder="' +
+            q.placeholder + '" aria-label="你的答案" />' +
+            (q.unit ? '<span style="font-weight:800;font-size:19px">' + q.unit + "</span>" : "") +
+            '<button class="btn primary" type="button" data-check>提交 Check</button></div>';
+          var input = body.querySelector(".ans-input");
+          var checkBtn = body.querySelector("[data-check]");
+          function doCheck() {
+            if (qAnswered) return;
+            var raw = input.value.replace(/[,，\s°]/g, "").replace("−", "-").replace(/degrees/gi, "").replace(/C$/i, "");
+            var val = parseInt(raw, 10);
+            if (isNaN(val)) {
+              $("qFb").textContent = "先输入一个数字哦 🙂";
+              $("qFb").className = "feedback bad";
+              return;
+            }
+            var correct = val === q.answer;
+            input.disabled = true; checkBtn.disabled = true;
+            input.style.borderColor = correct ? "var(--good)" : "var(--bad)";
+            if (!correct) {
+              var ex = $("qEx");
+              ex.innerHTML = "正确答案是 <b>" + fmt(q.answer) + (q.unit ? " " + q.unit : "") + "</b>。" + q.explain;
+              ex.classList.add("show");
+              $("qFb").textContent = "不对哦，看看下面的方法 ↓";
+              $("qFb").className = "feedback bad";
+              markAnswered(false, q);
+              return;
+            }
+            showExplain(q, true);
+            markAnswered(true, q);
+          }
+          checkBtn.addEventListener("click", doCheck);
+          input.addEventListener("keydown", function (e) { if (e.key === "Enter") doCheck(); });
+        } else if (q.type === "order") {
+          body.innerHTML = head + '<div class="order-pool"></div>' +
+            '<div class="btnrow"><button class="btn primary" type="button" data-check>检查 Check</button>' +
+            '<button class="btn" type="button" data-clear>重新点 Start again</button></div>';
+          var pool = body.querySelector(".order-pool");
+          var picked = [];
+          var displayOrder = shuffle(q.values.slice());
+          function draw() {
+            pool.innerHTML = "";
+            displayOrder.forEach(function (v) {
+              var b = document.createElement("button");
+              b.type = "button"; b.className = "order-chip"; b.dataset.v = v;
+              var rank = picked.indexOf(v);
+              if (rank >= 0) b.classList.add("picked");
+              b.innerHTML = '<span class="rank">' + (rank >= 0 ? rank + 1 : "") + "</span>" + fmtNeg(v);
+              b.addEventListener("click", function () {
+                if (qAnswered) return;
+                var i = picked.indexOf(v);
+                if (i >= 0) picked.splice(i, 1);
+                else if (picked.length < q.values.length) picked.push(v);
+                draw();
+              });
+              pool.appendChild(b);
+            });
+          }
+          draw();
+          body.querySelector("[data-clear]").addEventListener("click", function () {
+            if (qAnswered) return;
+            picked = []; draw();
+          });
+          body.querySelector("[data-check]").addEventListener("click", function () {
+            if (qAnswered) return;
+            if (picked.length < q.values.length) {
+              $("qFb").textContent = "先把 " + q.values.length + " 个数都点完哦（已点 " + picked.length + " 个）";
+              $("qFb").className = "feedback bad";
+              return;
+            }
+            var sorted = q.values.slice().sort(function (x, y) { return x - y; });
+            var correct = picked.every(function (v, i) { return v === sorted[i]; });
+            pool.querySelectorAll(".order-chip").forEach(function (chip) {
+              var v = +chip.dataset.v, rank = picked.indexOf(v);
+              chip.classList.add(sorted[rank] === v ? "right" : "wrong");
+            });
+            showExplain(q, correct);
+            markAnswered(correct, q);
+          });
+        }
+      }
+      function showResults() {
+        $("quizCard").style.display = "none";
+        $("resultCard").style.display = "block";
+        $("qBar").style.width = "100%";
+        var stars = qScore >= 18 ? "★★★" : (qScore >= 13 ? "★★☆" : (qScore >= 8 ? "★☆☆" : "☆☆☆"));
+        $("resStars").textContent = stars;
+        $("resLine").textContent = "你答对了 " + qScore + " / " + QUESTIONS.length + " 题！You scored " + qScore + " out of " + QUESTIONS.length + ".";
+        var box = $("resSkills"); box.innerHTML = "";
+        Object.keys(SKILL_NAMES).forEach(function (k) {
+          var s = qStats[k];
+          var pct = s.t ? Math.round(s.c / s.t * 100) : 0;
+          var row = document.createElement("div");
+          row.className = "skill-row";
+          row.innerHTML = '<span class="sname">' + SKILL_NAMES[k] + '</span>' +
+            '<span class="sbar"><span class="sfill' + (pct < 100 ? " weak" : "") + '" style="display:block;width:' + pct + '%"></span></span>' +
+            '<span class="sscore">' + s.c + " / " + s.t + "</span>";
+          box.appendChild(row);
+          if (pct < 100) {
+            var tip = document.createElement("p");
+            tip.className = "zh-note";
+            tip.style.margin = "0 0 6px 140px";
+            tip.textContent = "👉 「" + SKILL_NAMES[k] + "」还可以更稳：回到上面对应部分，把 TRY 和 PLAY 再玩一遍，然后重新挑战！";
+            box.appendChild(tip);
+          }
+        });
+        $("resultCard").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      $("qNext").addEventListener("click", function () {
+        if (qIdx >= QUESTIONS.length - 1) { showResults(); return; }
+        qIdx++;
+        renderQuestion();
+      });
+      $("quizRestart").addEventListener("click", function () {
+        qIdx = 0; qScore = 0; resetStats();
+        $("qScore").textContent = "⭐ 得分 Score: 0";
+        $("resultCard").style.display = "none";
+        $("quizCard").style.display = "block";
+        renderQuestion();
+        $("quiz").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      renderQuestion();
+    </script>
+  </body>
+</html>
